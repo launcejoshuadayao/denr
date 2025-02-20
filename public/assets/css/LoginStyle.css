@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat';
+    
+
+}
+
+
+.main{
+    height: 100vh;
+    width: 100%;
+    /* display: flex;
+    flex-direction: column; */
+    background-color: #FBFFE4;
+    color:#B3D8A8;;
+}
+
+.row {
+    
+    display: flex;
+  }
+  
+  .column {
+    align-content: center;
+    /* margin: 0 auto; */
+
+    flex: 50%;
+  }
+  input[type='text'], input[type='password']{
+    font-size: 13px;
+    height: 40px;
+    color: #3D8D7A;
+    width: 300px;
+    border-radius: 20px;
+  }
+
+  .form-1{
+    margin: auto;
+  }
+
+  hr {
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+    width: 300px;
+}
+
+
+.column button{
+    background-color: #B3D8A8;
+    color: #3D8D7A;
+  width: 300px;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+}
+button:hover{
+background-color: #3D8D7A;
+color: #B3D8A8;
+}
+
+input::placeholder{
+    color: #3D8D7A;
+    font-size: 12px;
+}
+
+  .c1{
+    margin: auto;
+    font-size: 20px;
+font-weight: bold;
+  }
+  .vision{
+    font-size: larger;
+  }
+
+  .login{
+    /* text-align: center; */
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+  }
+
+  .logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 100vh;
+  }
+  .denr{
+    height: 100px;
+    width: 100px;
+ margin-right: 20px;
+  }
+
+.heading{
+    display: flex;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+label{
+  font-size: 12px;
+}
+  .sides{
+    background-color: #3D8D7A;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    height: 85%;
+    width: 85%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+
+
+  .swal-icon {
+    width: 300px !important; /* Adjust size */
+    height: 200px !important; /* Adjust size */
+}
+
+.swal-footer {
+    text-align: center !important;
+}
+.swal-button-container {
+    display: inline-block;
+}
+
+
+
+
