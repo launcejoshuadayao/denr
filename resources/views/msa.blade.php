@@ -14,7 +14,7 @@
                 <div class="search-filter">
                     <p class="p-filter">Filter: </p>
                     <div class="filter">
-                        <select name="filter" id="filter">
+                        <select name="filters" id="filters">
                             <option selected disabled hidden style="color: #a0a5b1;">Patented/Subsisting</option>
                             <option value="Subsisting">Subsisting</option>
                             <option value="Patented">Patented</option>
@@ -68,7 +68,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="delete-confirm">
-                                            <i class="material-icons">&#xE872;</i>
+                                            <i class="material-icons">&#xe149;</i>
                                         </button>
                                     </form>
 

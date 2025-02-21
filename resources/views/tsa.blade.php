@@ -62,9 +62,17 @@
             <td>{{ $ts->remarks }}</td>
             <td> 
                 <div class="actions">
-                <a href="#" class="edit"><i class="material-icons">&#xE254;</i></a>
-                <a href="" class="delete-confirm" data-url="">
-    <i class="material-icons">&#xe149;</i>
+                    <button class="edit-btn">
+                        <i class="material-icons">&#xE254;</i> <!-- Edit Icon -->
+                    </button>
+
+                    <form action="" method="POST"class="delete-form">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="delete-confirm">
+                            <i class="material-icons">&#xe149;</i>
+                        </button>
+                    </form>
                 </div>
                     </td>
             </tr>

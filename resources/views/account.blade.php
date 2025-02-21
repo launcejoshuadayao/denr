@@ -44,12 +44,17 @@
             
             <td> 
                 <div class="actions">
-                <a href="#" class="edit"><i class="material-icons">&#xE254;</i></a>
-                <a href="{{ route('deletemsa') }}" class="delete-confirm" data-url="{{ route('deletemsa') }}">
-    <i class="material-icons">&#xe149;</i>
-</a>
+                  <button class="edit-btn">
+                    <i class="material-icons">&#xE254;</i> <!-- Edit Icon -->
+                </button>
 
-                <!-- <button class="delete" onclick="deleteConfirmation()"><i class="material-icons">&#xE872;</i></button> -->
+                <form action="" method="POST"class="delete-form">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="delete-confirm">
+                        <i class="material-icons">&#xe149;</i>
+                    </button>
+                </form>
                 </div>
                     </td>
             </tr>
