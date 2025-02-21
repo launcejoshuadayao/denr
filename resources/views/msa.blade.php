@@ -54,7 +54,7 @@
                             <td>{{ $ms->remarks }}</td>
                             <td>
                                 <div class="actions">
-                                    <button class="edit-btn" data-id="{{ $ms->id_msa }}"
+                                    <button class="edit-btn" title = "Edit" data-id="{{ $ms->id_msa }}"
                                         data-applicant_name="{{ $ms->applicant_name }}"
                                         data-applicant_number="{{ $ms->applicant_number }}"
                                         data-patented_subsisting="{{ $ms->patented_subsisting }}"
@@ -67,7 +67,7 @@
                                         class="delete-form">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="delete-confirm">
+                                        <button type="submit" class="delete-confirm" title="Delete">
                                             <i class="material-icons">&#xe149;</i>
                                         </button>
                                     </form>

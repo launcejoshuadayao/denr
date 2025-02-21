@@ -155,13 +155,15 @@ table tbody tr:hover {
 .actions i {
    
     /* padding: auto; */
-    margin-left: 6px;
+    /* margin-left: 6px; */
+    /* padding-right: 10px; */
     font-size: 20px;
 }
 
 .actions{
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 .actions button{
     border: none;
@@ -171,6 +173,12 @@ table tbody tr:hover {
 
 
 .view { color: #03A9F4; }
-.edit-btn { color: #FFC107; }
-.delete-confirm { color: #E34724; }
+.edit-btn { 
+    color: #FFC107;
+    margin-right: 5px; 
+}
+.delete-confirm { 
+    color: #E34724;
+    margin-left: 5px; 
+}
 

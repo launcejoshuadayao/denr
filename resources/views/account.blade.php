@@ -43,19 +43,19 @@
             <td>{{$acc->password}}</td>
             
             <td> 
-                <div class="actions">
-                  <button class="edit-btn">
+              <div class="actions">
+                <button class="edit-btn" title="Edit">
                     <i class="material-icons">&#xE254;</i> <!-- Edit Icon -->
                 </button>
 
-                <form action="" method="POST"class="delete-form">
+                <form action="" method="POST"class="delete-form" >
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="delete-confirm">
+                    <button type="submit" class="delete-confirm" title="Delete">
                         <i class="material-icons">&#xe149;</i>
                     </button>
                 </form>
-                </div>
+            </div>
                     </td>
             </tr>
            @endforeach
