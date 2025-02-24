@@ -1,19 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Models\Rfpa;
-class RfpaController extends Controller
+use App\Models\Sp;
+use Schema;
+
+class SpController extends Controller
 {
-    public function rfpa(){
-        $rfpadata = Rfpa::all();
+    public function sp(){
+        $spdata = sp::all();
         
-        return view('rfpa', compact('rfpadata'));
+        return view('sp', compact('spdata'));
     }
-    public function addrfpa(Request $request)
+
+    public function addsp(Request $request)
     {
         $request->validate([
             'applicantname' => 'required|string|max:255',
@@ -21,13 +23,15 @@ class RfpaController extends Controller
             'refferedinvestigator' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'surveynumber' => 'required|string|max:100',
+            'sector' => 'required|string',
             'status' => 'required|string',
             'remarks' => 'nullable|string',
         ]);
-        $insert = DB::table('rfpa')->insert([
+        $insert = DB::table('sp')->insert([
             'applicant_name' => $request->applicantname,
             'applicant_number' => $request->applicantnumber,
             'reffered_investigator' => $request->refferedinvestigator,
+            'sector' => $request->sector,
             'patented_subsisting' => $request->status,
             'location' => $request->location,
             'survey_no' => $request->surveynumber,
@@ -43,38 +47,37 @@ class RfpaController extends Controller
         }
     }
 
-
-    public function updaterfpa(Request $request, $id_rfpa)
-    {
-        $request->validate([
-            'applicantname' => 'required|string|max:255',
-            'applicantnumber' => 'required|string|max:100',
-            'refferedinvestigator' => 'required|string|max:255',
-            'location' => 'required|string|max:255',
-            'surveynumber' => 'required|string|max:100',
-            'status' => 'required|in:subsisting,patented',
-            'remarks' => 'nullable|string',
-        ]);
-
-        $update = DB::table('rfpa')->where('id_rfpa', $id_rfpa)->update([
-            'applicant_name' => $request->applicantname,
-            'applicant_number' => $request->applicantnumber,
-            'reffered_investigator' => $request->refferedinvestigator,
-            'location' => $request->location,
-            'survey_no' => $request->surveynumber,
-            'patented_subsisting' => $request->status,
-            'remarks' => $request->remarks,
-        ]);
-if($update){
-    return back()->with('success', 'Application updated successfully!');
-}
-else{
-    return back()->with('error', 'An error occurred while updating the record.');
-}
-        
+    public function updatesp(Request $request, $id_sp)
+{
+    $request->validate([
+        'applicantname' => 'required|string|max:255',
+        'applicantnumber' => 'required|string|max:100',
+        'refferedinvestigator' => 'required|string|max:255',
+        'location' => 'required|string|max:255',
+        'surveynumber' => 'required|string|max:100',
+        'sector' => 'required|string',
+        'status' => 'required|string',
+        'remarks' => 'nullable|string',
+    ]);
+    $update = DB::table('sp')->where('id_sp', $id_sp)->update([
+        'applicant_name' => $request->applicantname,
+        'applicant_number' => $request->applicantnumber,
+        'patented_subsisting' => $request->status,
+        'reffered_investigator' => $request->refferedinvestigator,
+        'location' => $request->location,
+        'sector' => $request->sector,
+        'survey_no' => $request->surveynumber,
+        'remarks' => $request->remarks
+    ]);
+    if ($update) {
+        return back()->with('success', 'Record updated successfully.');
+    } else {
+        return back()->with('error', 'An error occurred while updating the record.');
     }
+}
 
-    public function deleterfpa($id_rfpa)
+
+    public function deletesp($id_sp)
     {
         // $msa = msa::where($id_msa, 'id_msa')->first();
 
@@ -85,7 +88,7 @@ else{
 
         // return back()->with('error', 'Record not found.');
 
-        $deleted = DB::table('rfpa')->where('id_rfpa', $id_rfpa)->delete();
+        $deleted = DB::table('sp')->where('id_sp', $id_sp)->delete();
 
         if ($deleted) {
             return back()->with('success', 'Record successfully deleted.');

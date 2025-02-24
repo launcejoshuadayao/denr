@@ -14,18 +14,20 @@
                 <div class="search-filter">
                     <p class="p-filter">Filter: </p>
                     <div class="filter">
-                        <select name="filter" id="filter">
+                        <select name="filters" id="filters">
                             <option selected disabled hidden style="color: #a0a5b1;">Patented/Subsisting</option>
                             <option value="Subsisting">Subsisting</option>
                             <option value="Patented">Patented</option>
                             <option value="All">All</option>
                         </select>
                     </div>
+
                     <div class="search-box">
-                        <i class="material-icons">&#xE8B6;</i>
-                        <input type="text" placeholder="Search&hellip;">
+                    <i class="material-icons">&#xE8B6;</i>
+                    <input type="text" id="searchInput" placeholder="Search&hellip;">
                     </div>
-                </div>
+
+                 </div>
 
             </div>
 
@@ -54,7 +56,7 @@
                             <td>{{ $ms->remarks }}</td>
                             <td>
                                 <div class="actions">
-                                    <button class="edit-btn" data-id="{{ $ms->id_msa }}"
+                                    <button class="edit-btn" title = "Edit" data-id="{{ $ms->id_msa }}"
                                         data-applicant_name="{{ $ms->applicant_name }}"
                                         data-applicant_number="{{ $ms->applicant_number }}"
                                         data-patented_subsisting="{{ $ms->patented_subsisting }}"
@@ -67,8 +69,8 @@
                                         class="delete-form">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="delete-confirm">
-                                            <i class="material-icons">&#xE872;</i>
+                                        <button type="submit" class="delete-confirm" title="Delete">
+                                            <i class="material-icons">&#xe149;</i>
                                         </button>
                                     </form>
 
@@ -327,6 +329,36 @@
                         </script>
                     @endif
 
+                    <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                document.getElementById("searchInput").addEventListener("input", function () {
+                                    const searchValue = this.value.toLowerCase();
+                                    const rows = document.querySelectorAll("#tables tbody tr");
+
+                                    rows.forEach(row => {
+                                        const cells = row.querySelectorAll("td");
+                                        let match = false;
+                                        cells.forEach(cell => {
+                                            if (cell.textContent.toLowerCase().includes(searchValue)) {
+                                                match = true;
+                                            }
+                                        });
+                                        row.style.display = match ? "" : "none";
+                                    });
+                                });
+                            });
+
+                    </script>
+
+                    @if(Session::has('message'))
+                    <script>
+                        swal("Error logging in", "{{ Session::get('message') }}", "error");
+                    </script>
+                    @elseif(Session::has('success'))
+                    <script>
+                        swal("Application Added", "{{ Session::get('success') }}", "success");
+                    </script>
+                    @endif
 
     </body>
 

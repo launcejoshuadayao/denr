@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use HasFactory;
 class Rfpa extends Model
 {
     protected $table = 'rfpa';
