@@ -75,7 +75,7 @@ body {
 .table-title .search-filter{
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: end;
 }
 
 .p-filter {
@@ -90,6 +90,11 @@ body {
     display: flex;
     justify-content: center;
     font-size: 14px;
+}
+
+.filter {
+    display: flex;
+    align-items: end;
 }
 
 .search-box {
@@ -150,12 +155,30 @@ table tbody tr:hover {
 .actions i {
    
     /* padding: auto; */
-    margin-left: 6px;
+    /* margin-left: 6px; */
+    /* padding-right: 10px; */
     font-size: 20px;
+}
+
+.actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.actions button{
+    border: none;
+    background: none;
+    cursor: pointer;
 }
 
 
 .view { color: #03A9F4; }
-.edit { color: #FFC107; }
-.delete-confirm { color: #E34724; }
+.edit-btn { 
+    color: #FFC107;
+    margin-right: 5px; 
+}
+.delete-confirm { 
+    color: #E34724;
+    margin-left: 5px; 
+}
 

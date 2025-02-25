@@ -66,6 +66,7 @@
             <td>{{ $tsa->remarks }}</td>
             <td>
                 <div class="actions">
+
                     <button class="edit-btn" title = "Edit" data-id="{{ $tsa->id_tsa }}"
                         data-applicant_name="{{ $tsa->applicant_name }}"
                         data-applicant_number="{{ $tsa->applicant_number }}"
@@ -89,6 +90,7 @@
                                     <!-- <button class="delete" onclick="deleteConfirmation()"><i class="material-icons">&#xE872;</i></button> -->
             </div>
             </td>
+
             </tr>
            @endforeach
         </tbody>
