@@ -8,7 +8,7 @@
 <div class="table-container">
     <div class="table-title">
         <div class="title-left">
-        <h2>FREE PATENT APPLICATION (AGRICULTURAL)</h2>
+        <h2>FREE PATENT APPLICATION - AGRICULTURAL</h2>
         <button class="addApplicant" onclick="openForm()">ADD APPLICANT</button>
         </div>
         <div class="search-filter">
@@ -75,7 +75,7 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="delete-confirm">
-                            <i class="material-icons">&#xE872;</i>
+                            <i class="material-icons">&#xe149;</i>
                             </button>
                         </form>
 

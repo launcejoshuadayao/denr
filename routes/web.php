@@ -49,11 +49,17 @@ Route::post('/addtsa', [TsaController::class, 'addtsa'])->name('addtsa');
 Route::put('/updatetsa/{id_tsa}', [TsaController::class, 'updatetsa'])->name('updatetsa');
 Route::delete('/deletetsa/{id_tsa}', [TsaController::class, 'deletetsa'])->name('deletetsa');
 
-//SP
-Route::get('/sp', [SpController:: class, 'sp'])->name('sp');
-Route::post('/addsp', [SpController::class, 'addsp'])->name('addsp');
-Route::put('/updatesp/{id_sp}', [SpController::class, 'updatesp'])->name('updatesp');
-Route::delete('/deletesp/{id_sp}', [SpController::class, 'deletesp'])->name('deletesp');
+//SP Government
+Route::get('/spgovernment', [SpController:: class, 'sp_government'])->name('sp-gov');
+Route::post('/addsp_gov', [SpController::class, 'addspgov'])->name('addsp_gov');
+Route::put('/updatesp_gov/{id_spgov}', [SpController::class, 'updatesp_gov'])->name('updatesp_gov');
+Route::delete('/deletesp_gov/{id_spgov}', [SpController::class, 'deletesp_gov'])->name('deletesp_gov');
+
+//SP School
+Route::get('/spschool', [SpController:: class, 'sp_school'])->name('sp-school');
+Route::post('/addsp_school', [SpController::class, 'addspschool'])->name('addsp_school');
+Route::put('/updatesp_school/{id_spschool}', [SpController::class, 'updatesp_school'])->name('updatesp_school');
+Route::delete('/deletesp_school/{id_spschool}', [SpController::class, 'deletesp_school'])->name('deletesp_school');
 
 
 

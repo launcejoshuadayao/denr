@@ -83,7 +83,7 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="delete-confirm">
-                            <i class="material-icons">&#xE872;</i>
+                            <i class="material-icons">&#xe149;</i>
                             </button>
                         </form>
 

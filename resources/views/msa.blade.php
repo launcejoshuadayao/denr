@@ -183,11 +183,11 @@
 
                     <script>
 
-                        document.querySelector("#filter").addEventListener("change", filterTable);
+                        document.querySelector("#filters").addEventListener("change", filterTable);
 
                         function filterTable() {
 
-                            const selectedOption = document.querySelector("#filter").value;
+                            const selectedOption = document.querySelector("#filters").value;
                             const tableRows = document.querySelectorAll("#tables tr");
 
                             tableRows.forEach((row, index) => {

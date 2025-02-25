@@ -28,24 +28,24 @@
                 </div>
                 <ul>
                     <a href="/login">HOME</a>
-                    <a href="/fpa">FPA</a>
                     <a href="/msa">MSA</a>
+                    <a href="/fpa">FPA</a>
                     <a href="/rfpa">RFPA</a>
                     <a href="/sa">SA</a>
                     <a href="/tsa">TSA</a> 
-                    <a href="/sp">SP</a>
-                    <!-- <div class = "sp">
+                    {{-- <a href="/sp">SP</a> --}}
+                     <div class = "sp">
                         <div class = dropdown-sp>
                             <li>
-                    <a href="/sp">SP<i class="ri-arrow-down-s-line"></i></a>
+                    <a href="">SP<i class="ri-arrow-down-s-line"></i></a>
                     </li>
                     <p>Special Patent</p>
                     <div class="sp-content">
-                            <a href="">Government</a>
-                            <a href="">School</a>
+                            <a href="/spgovernment">Government</a>
+                            <a href="/spschool">School</a>
                         </div>
                     </div>
-                    </div> -->
+                    </div> 
                 </ul>                    
             </div>
             <div class="nav-2">

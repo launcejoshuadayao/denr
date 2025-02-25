@@ -4,19 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use HasFactory;
-
-class Sp extends Model
+class Spgov extends Model
 {
-    protected $table = 'sp';
+    //
+    protected $table = 'sp_government';
     
     protected $fillable = [
-        'id_sp',
+        'id_spgov',
         'applicant_name',
         'applicant_number',
         'referred_investigator',
         'patented_subsisting',
-        'sector',
         'location',
         'survey_no',
         'remarks',        

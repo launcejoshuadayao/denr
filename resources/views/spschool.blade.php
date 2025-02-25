@@ -8,19 +8,19 @@
 <div class="table-container">
     <div class="table-title">
         <div class="title-left">
-        <h2>TOWNSITE SALES APPLICATION</h2>
+        <h2>SPECIAL PATENT - SCHOOL</h2>
         <button class="addApplicant" onclick="openForm()">ADD APPLICANT</button>
         </div>
         <div class="search-filter">
             <p class="p-filter">Filter: </p>
             <div class="filter">
-            <select name="filter1" id="filter1">
+            {{-- <select name="filter1" id="filter1">
 
                 <option selected disabled hidden style = "color: #a0a5b1;" value = "none1" >Sector</option>
                 <option value="Government">Government</option>
                 <option value="School">School</option>
                 <option value="All">All</option>
-            </select>
+            </select> --}}
             <select name="filter" id="filter">
                 <option selected disabled hidden style = "color: #a0a5b1;" value = "none" >Patented/Subsisting</option>
                 <option value="Subsisting">Subsisting</option>
@@ -47,7 +47,6 @@
                 <th>Applicant Number</th>
                 <th>Reffered Investigator</th>
                 <th>Patented/Subsisting</th>
-                <th>Sector</th>
                 <th>Location</th>
                 <th>Survey No.</th>
                 <th>Remarks</th>
@@ -55,32 +54,31 @@
             </tr>
         </thead>
         <tbody>
-        @foreach($spdata as $sp)
+        @foreach($sp_schooldata as $sp_school)
             <tr>
-            <td>{{ $sp->id_sp}}</td>
-            <td>{{ $sp->applicant_name }}</td>
-            <td>{{ $sp->applicant_number }}</td>
-            <td>{{ $sp->reffered_investigator }}</td>
-            <td>{{ $sp->patented_subsisting }}</td>
-            <td>{{ $sp->sector}}</td>
-            <td>{{ $sp->location }}</td>
-            <td>{{ $sp->survey_no }}</td>
-            <td>{{ $sp->remarks }}</td>
+            <td>{{ $sp_school->id_spschool}}</td>
+            <td>{{ $sp_school->applicant_name }}</td>
+            <td>{{ $sp_school->applicant_number }}</td>
+            <td>{{ $sp_school->reffered_investigator }}</td>
+            <td>{{ $sp_school->patented_subsisting }}</td>
+            
+            <td>{{ $sp_school->location }}</td>
+            <td>{{ $sp_school->survey_no }}</td>
+            <td>{{ $sp_school->remarks }}</td>
             <td>
                 <div class="actions">
-                    <button class="edit-btn" title = "Edit" data-id="{{ $sp->id_sp }}"
-                        data-applicant_name="{{ $sp->applicant_name }}"
-                        data-applicant_number="{{ $sp->applicant_number }}"
-                        data-reffered_investigator="{{ $sp->reffered_investigator }}"
-                        data-patented_subsisting="{{ $sp->patented_subsisting }}"
-                        data-sector="{{ $sp->sector }}"
-                        data-location="{{ $sp->location }}" 
-                        data-survey_no="{{ $sp->survey_no }}"
-                        data-remarks="{{ $sp->remarks }}" onclick="openFormEdit(this)">
+                    <button class="edit-btn" title = "Edit" data-id="{{ $sp_school->id_spschool}}"
+                        data-applicant_name="{{ $sp_school->applicant_name }}"
+                        data-applicant_number="{{ $sp_school->applicant_number }}"
+                        data-reffered_investigator="{{ $sp_school->reffered_investigator }}"
+                        data-patented_subsisting="{{ $sp_school->patented_subsisting }}"
+                        data-location="{{ $sp_school->location }}" 
+                        data-survey_no="{{ $sp_school->survey_no }}"
+                        data-remarks="{{ $sp_school->remarks }}" onclick="openFormEdit(this)">
                         <i class="material-icons">&#xE254;</i> <!-- Edit Icon -->
                     </button>
 
-            <form action="{{ route('deletesp', ['id_sp' => $sp->id_sp]) }}" method="POST"
+            <form action="{{ route('deletesp_school', ['id_spschool' => $sp_school->id_spschool]) }}" method="POST"
                     class="delete-form">
                         @csrf
                         @method('DELETE')
@@ -98,7 +96,7 @@
     </table>
 
     <div class="form-popup" id="myForm">
-                <form action="{{ route('addsp') }}" class="form-container" method="POST">
+                <form action="{{ route('addsp_school') }}" class="form-container" method="POST">
                     @csrf
                     <div class="titleCloseButton">
                         <h1 style="margin-bottom: 10px;">ADD APPLICATION</h1><button type="button" class="close-button"
@@ -131,12 +129,7 @@
                                     <input type="text" placeholder="Enter Survey number" name="surveynumber" required><br>
 
                                     <div class = "row">
-                                    <label for="sector">Sector</label><br>
-                                    <select name="sector">
-                                        <option>Select</option>
-                                        <option value="Government">Government</option>
-                                        <option value="School">School</option>
-                                    </select>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -188,13 +181,13 @@
                                         <label for="surveynumber">Survey Number</label>
                                         <input type="text" placeholder="Enter Survey number" name="surveynumber" required><br>
 
-                                        <label for="sector">Sector</label><br>
+                                        {{-- <label for="sector">Sector</label><br>
                                         <select name="sector">
                                         <option>Select</option>
                                         <option value="Government">Government</option>
                                         <option value="School">School</option>
-                                    </select>
-                                        </select>
+                                    </select> --}}
+                                        {{-- </select> --}}
                                     </div>
                                 </div>
                                 <label for="refferedinvestigator">Reffered Investigator</label>
@@ -208,26 +201,49 @@
     
 
                                 <script>
+                                        // document.querySelector("#filter").addEventListener("change", filterTable);
+                                        // document.querySelector("#filter1").addEventListener("change", filterTable);
+
+                                        // function filterTable() {
+                                        //     const selectedOption1 = document.querySelector("#filter1").value.toLowerCase(); 
+                                        //     const selectedOption = document.querySelector("#filter").value.toLowerCase();   
+                                        //     const tableRows = document.querySelectorAll("#tables tbody tr");
+
+                                        //     tableRows.forEach((row) => {
+                                        //         const patentedSubsisting = row.children[4].textContent.toLowerCase();  
+                                        //         const sector = row.children[5].textContent.toLowerCase();             
+                                        //         const matchesPatentedSubsisting = (selectedOption === "all" || patentedSubsisting === selectedOption);
+                                        //         const matchesSector = (selectedOption1 === "all" || sector === selectedOption1);
+                                        //         if (matchesPatentedSubsisting && matchesSector) {
+                                        //             row.style.display = "";
+                                        //         } else {
+                                        //             row.style.display = "none";
+                                        //         }
+                                        //     });
+                                        // }
+
                                         document.querySelector("#filter").addEventListener("change", filterTable);
-                                        document.querySelector("#filter1").addEventListener("change", filterTable);
 
-                                        function filterTable() {
-                                            const selectedOption1 = document.querySelector("#filter1").value.toLowerCase(); 
-                                            const selectedOption = document.querySelector("#filter").value.toLowerCase();   
-                                            const tableRows = document.querySelectorAll("#tables tbody tr");
+                        function filterTable() {
 
-                                            tableRows.forEach((row) => {
-                                                const patentedSubsisting = row.children[4].textContent.toLowerCase();  
-                                                const sector = row.children[5].textContent.toLowerCase();             
-                                                const matchesPatentedSubsisting = (selectedOption === "all" || patentedSubsisting === selectedOption);
-                                                const matchesSector = (selectedOption1 === "all" || sector === selectedOption1);
-                                                if (matchesPatentedSubsisting && matchesSector) {
-                                                    row.style.display = "";
-                                                } else {
-                                                    row.style.display = "none";
-                                                }
-                                            });
-                                        }
+                            const selectedOption = document.querySelector("#filter").value;
+                            const tableRows = document.querySelectorAll("#tables tr");
+
+                            tableRows.forEach((row, index) => {
+                                if (index === 0) return;
+
+                                if (row.children[4].textContent.toLowerCase() === selectedOption.toLowerCase() || selectedOption === "All") {
+
+                                    row.style.display = "";
+                                }
+                                else {
+
+                                    row.style.display = "none";
+
+                                }
+                            });
+
+                        }
 
 
                                     </script>
@@ -315,7 +331,7 @@
 
                         function openFormEdit(button) {
                         document.getElementById("myFormEdit").style.display = "block";
-                        document.getElementById("editForm").action = "{{ route('updatesp', '') }}/" + button.getAttribute("data-id");
+                        document.getElementById("editForm").action = "{{ route('updatesp_school', '') }}/" + button.getAttribute("data-id");
 
                         document.querySelector("#myFormEdit input[name='applicantname']").value = button.getAttribute("data-applicant_name");
                         document.querySelector("#myFormEdit input[name='applicantnumber']").value = button.getAttribute("data-applicant_number");
@@ -327,20 +343,6 @@
                         let statusDropdown = document.querySelector("#myFormEdit select[name='status']");
                         let statusValue = button.getAttribute("data-patented_subsisting");
 
-                        let sectorDropdown = document.querySelector("#myFormEdit select[name='sector']");
-                        let sectorValue = button.getAttribute("data-sector");
-                        for (let option of statusDropdown.options) {
-                            if (option.value.toLowerCase() === statusValue.toLowerCase()) {
-                                option.selected = true;
-                                break;
-                            }
-                        }
-                        for (let option of sectorDropdown.options) {
-                            if (option.value.toLowerCase() === sectorValue.toLowerCase()) {
-                                option.selected = true;
-                                break;
-                            }
-                        }
                     }
 
 
