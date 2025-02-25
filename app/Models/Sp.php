@@ -5,18 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use HasFactory;
-class Tsa extends Model
+
+class Sp extends Model
 {
-    protected $table = 'tsa';
+    protected $table = 'sp';
     
     protected $fillable = [
-        'id_tsa',
+        'id_sp',
         'applicant_name',
         'applicant_number',
+        'referred_investigator',
         'patented_subsisting',
+        'sector',
         'location',
         'survey_no',
-        'cleared_old',
         'remarks',        
     ];
 }

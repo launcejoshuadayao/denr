@@ -21,11 +21,13 @@
                             <option value="All">All</option>
                         </select>
                     </div>
+
                     <div class="search-box">
-                        <i class="material-icons">&#xE8B6;</i>
-                        <input type="text" placeholder="Search&hellip;">
+                    <i class="material-icons">&#xE8B6;</i>
+                    <input type="text" id="searchInput" placeholder="Search&hellip;">
                     </div>
-                </div>
+
+                 </div>
 
             </div>
 
@@ -327,6 +329,36 @@
                         </script>
                     @endif
 
+                    <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                document.getElementById("searchInput").addEventListener("input", function () {
+                                    const searchValue = this.value.toLowerCase();
+                                    const rows = document.querySelectorAll("#tables tbody tr");
+
+                                    rows.forEach(row => {
+                                        const cells = row.querySelectorAll("td");
+                                        let match = false;
+                                        cells.forEach(cell => {
+                                            if (cell.textContent.toLowerCase().includes(searchValue)) {
+                                                match = true;
+                                            }
+                                        });
+                                        row.style.display = match ? "" : "none";
+                                    });
+                                });
+                            });
+
+                    </script>
+
+                    @if(Session::has('message'))
+                    <script>
+                        swal("Error logging in", "{{ Session::get('message') }}", "error");
+                    </script>
+                    @elseif(Session::has('success'))
+                    <script>
+                        swal("Application Added", "{{ Session::get('success') }}", "success");
+                    </script>
+                    @endif
 
     </body>
 

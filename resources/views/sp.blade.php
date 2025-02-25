@@ -16,9 +16,9 @@
             <div class="filter">
             <select name="filter1" id="filter1">
 
-                <option selected disabled hidden style = "color: #a0a5b1;" value = "none1" >Cleared/Old</option>
-                <option value="Cleared">Cleared</option>
-                <option value="Old">Old</option>
+                <option selected disabled hidden style = "color: #a0a5b1;" value = "none1" >Sector</option>
+                <option value="Government">Government</option>
+                <option value="School">School</option>
                 <option value="All">All</option>
             </select>
             <select name="filter" id="filter">
@@ -45,40 +45,42 @@
                 <th>#</th>
                 <th>Applicant Name</th>
                 <th>Applicant Number</th>
+                <th>Reffered Investigator</th>
                 <th>Patented/Subsisting</th>
+                <th>Sector</th>
                 <th>Location</th>
                 <th>Survey No.</th>
-                <th>Cleared/Old</th>
                 <th>Remarks</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        @foreach($tsadata as $tsa)
+        @foreach($spdata as $sp)
             <tr>
-            <td>{{ $tsa->id_tsa}}</td>
-            <td>{{ $tsa->applicant_name }}</td>
-            <td>{{ $tsa->applicant_number }}</td>
-            <td>{{ $tsa->patented_subsisting }}</td>
-            <td>{{ $tsa->location }}</td>
-            <td>{{ $tsa->survey_no }}</td>
-            <td>{{ $tsa->cleared_old }}</td>
-            <td>{{ $tsa->remarks }}</td>
+            <td>{{ $sp->id_sp}}</td>
+            <td>{{ $sp->applicant_name }}</td>
+            <td>{{ $sp->applicant_number }}</td>
+            <td>{{ $sp->reffered_investigator }}</td>
+            <td>{{ $sp->patented_subsisting }}</td>
+            <td>{{ $sp->sector}}</td>
+            <td>{{ $sp->location }}</td>
+            <td>{{ $sp->survey_no }}</td>
+            <td>{{ $sp->remarks }}</td>
             <td>
                 <div class="actions">
-
-                    <button class="edit-btn" title = "Edit" data-id="{{ $tsa->id_tsa }}"
-                        data-applicant_name="{{ $tsa->applicant_name }}"
-                        data-applicant_number="{{ $tsa->applicant_number }}"
-                        data-patented_subsisting="{{ $tsa->patented_subsisting }}"
-                        data-location="{{ $tsa->location }}" 
-                        data-survey_no="{{ $tsa->survey_no }}"
-                        data-cleared_old="{{ $tsa->cleared_old }}"
-                        data-remarks="{{ $tsa->remarks }}" onclick="openFormEdit(this)">
+                    <button class="edit-btn" title = "Edit" data-id="{{ $sp->id_sp }}"
+                        data-applicant_name="{{ $sp->applicant_name }}"
+                        data-applicant_number="{{ $sp->applicant_number }}"
+                        data-reffered_investigator="{{ $sp->reffered_investigator }}"
+                        data-patented_subsisting="{{ $sp->patented_subsisting }}"
+                        data-sector="{{ $sp->sector }}"
+                        data-location="{{ $sp->location }}" 
+                        data-survey_no="{{ $sp->survey_no }}"
+                        data-remarks="{{ $sp->remarks }}" onclick="openFormEdit(this)">
                         <i class="material-icons">&#xE254;</i> <!-- Edit Icon -->
                     </button>
 
-            <form action="{{ route('deletetsa', ['id_tsa' => $tsa->id_tsa]) }}" method="POST"
+            <form action="{{ route('deletesp', ['id_sp' => $sp->id_sp]) }}" method="POST"
                     class="delete-form">
                         @csrf
                         @method('DELETE')
@@ -90,14 +92,13 @@
                                     <!-- <button class="delete" onclick="deleteConfirmation()"><i class="material-icons">&#xE872;</i></button> -->
             </div>
             </td>
-
             </tr>
            @endforeach
         </tbody>
     </table>
 
     <div class="form-popup" id="myForm">
-                <form action="{{ route('addtsa') }}" class="form-container" method="POST">
+                <form action="{{ route('addsp') }}" class="form-container" method="POST">
                     @csrf
                     <div class="titleCloseButton">
                         <h1 style="margin-bottom: 10px;">ADD APPLICATION</h1><button type="button" class="close-button"
@@ -130,16 +131,19 @@
                                     <input type="text" placeholder="Enter Survey number" name="surveynumber" required><br>
 
                                     <div class = "row">
-                                    <label for="clearedold">Cleared/Old</label><br>
-                                    <select name="clearedold">
+                                    <label for="sector">Sector</label><br>
+                                    <select name="sector">
                                         <option>Select</option>
-                                        <option value="Cleared">Cleared</option>
-                                        <option value="Old">Old</option>
+                                        <option value="Government">Government</option>
+                                        <option value="School">School</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <label for="refferedinvestigator">Reffered Investigator</label>
+                    <input type="text" placeholder="Enter Reffered Investigator" name="refferedinvestigator" required><br>
+
                     <label for="remarks">Remarks</label><br>
                     <!-- <input type="textarea" placeholder="Remarks" name="remarks" required><br>
                         -->
@@ -184,22 +188,50 @@
                                         <label for="surveynumber">Survey Number</label>
                                         <input type="text" placeholder="Enter Survey number" name="surveynumber" required><br>
 
-                                        <label for="clearedold">Cleared/Old</label><br>
-                                        <select name="clearedold">
-                                            <option>Select</option>
-                                            <option value="Cleared">Cleared</option>
-                                            <option value="Old">Old</option>
+                                        <label for="sector">Sector</label><br>
+                                        <select name="sector">
+                                        <option>Select</option>
+                                        <option value="Government">Government</option>
+                                        <option value="School">School</option>
+                                    </select>
                                         </select>
                                     </div>
                                 </div>
-                                
+                                <label for="refferedinvestigator">Reffered Investigator</label>
+                                <input type="text" placeholder="Enter Reffered Investigator" name="refferedinvestigator" required><br>
+
                                 <label for="remarks">Remarks</label><br>
                                 <textarea id="comments" name="remarks" rows="4" cols="50" placeholder="Remarks"></textarea><br><br>
                                 <input type="submit" class="btn" style="border-radius: 10px;" value="UPDATE APPLICATION">
   
     
     
-                    <script>
+
+                                <script>
+                                        document.querySelector("#filter").addEventListener("change", filterTable);
+                                        document.querySelector("#filter1").addEventListener("change", filterTable);
+
+                                        function filterTable() {
+                                            const selectedOption1 = document.querySelector("#filter1").value.toLowerCase(); 
+                                            const selectedOption = document.querySelector("#filter").value.toLowerCase();   
+                                            const tableRows = document.querySelectorAll("#tables tbody tr");
+
+                                            tableRows.forEach((row) => {
+                                                const patentedSubsisting = row.children[4].textContent.toLowerCase();  
+                                                const sector = row.children[5].textContent.toLowerCase();             
+                                                const matchesPatentedSubsisting = (selectedOption === "all" || patentedSubsisting === selectedOption);
+                                                const matchesSector = (selectedOption1 === "all" || sector === selectedOption1);
+                                                if (matchesPatentedSubsisting && matchesSector) {
+                                                    row.style.display = "";
+                                                } else {
+                                                    row.style.display = "none";
+                                                }
+                                            });
+                                        }
+
+
+                                    </script>
+                    <!-- <script>
                         document.querySelector("#filter").addEventListener("change", filterTable);
                         document.querySelector("#filter1").addEventListener("change", filterTable);
 
@@ -207,43 +239,37 @@
                             const selectedOption1 = document.querySelector("#filter1").value; 
                             const selectedOption = document.querySelector("#filter").value; 
                             const tableRows = document.querySelectorAll("#tables tr");
-
++
                             tableRows.forEach((row, index) => {
                                 if (index === 0) return; 
 
                                 const patentedSubsisting = row.children[3].textContent.toLowerCase(); 
-                                const clearedOld = row.children[6].textContent.toLowerCase(); 
+                                const Sector = row.children[6].textContent.toLowerCase(); 
 
                                 
                                 const matchesPatentedSubsisting = (selectedOption === "All" || patentedSubsisting === selectedOption.toLowerCase());
-                                const matchesClearedOld = (selectedOption1 === "All" || clearedOld === selectedOption1.toLowerCase());
+                                const matchesSector = (selectedOption1 === "All" || Sector === selectedOption1.toLowerCase());
 
                                 
                                 if (selectedOption1 === "All" && selectedOption === "All") {
                                     row.style.display = ""; 
                                 }
-                                // else if (selectedOption1 === "Cleared" && selectedOption === "none") {
-                                //     row.style.display = ""; 
-                                // }
-                                // else if (selectedOption1 === "Old" && selectedOption === "none") {
-                                //     row.style.display = ""; 
-                                // }
-                                else if (selectedOption1 === "Cleared" && selectedOption == "All"){
+                                else if (selectedOption1 === "Government" && selectedOption == "All"){
                                     row.style.display = "";
                                 }
-                                else if (selectedOption1 === "Cleared" && selectedOption === "Subsisting" && clearedOld === "cleared" && patentedSubsisting === "subsisting") {
+                                else if (selectedOption1 === "Government" && selectedOption === "Subsisting" && Sector === "government" && patentedSubsisting === "subsisting") {
                                     row.style.display = ""; 
                                 } 
-                                else if (selectedOption1 === "Cleared" && selectedOption === "Patented" && clearedOld === "cleared" && patentedSubsisting === "patented") {
+                                else if (selectedOption1 === "Government" && selectedOption === "Patented" && Sector === "government" && patentedSubsisting === "patented") {
                                     row.style.display = "";
                                 } 
-                                else if (selectedOption1 === "Old" && selectedOption === "Subsisting" && clearedOld === "old" && patentedSubsisting === "subsisting") {
+                                else if (selectedOption1 === "School" && selectedOption === "Subsisting" && Sector === "school" && patentedSubsisting === "subsisting") {
                                     row.style.display = ""; 
                                 } 
-                                else if (selectedOption1 === "Old" && selectedOption === "Patented" && clearedOld === "old" && patentedSubsisting === "patented") {
+                                else if (selectedOption1 === "School" && selectedOption === "Patented" && Sector === "school" && patentedSubsisting === "patented") {
                                     row.style.display = "";
                                 } 
-                                else if (matchesPatentedSubsisting && matchesClearedOld) {
+                                else if (matchesPatentedSubsisting && matchesSector) {
                                     row.style.display = ""; 
                                 } 
                                 else {
@@ -252,7 +278,7 @@
                             });
                         }
 
-                        </script>
+                        </script> -->
                         
 
 
@@ -289,10 +315,11 @@
 
                         function openFormEdit(button) {
                         document.getElementById("myFormEdit").style.display = "block";
-                        document.getElementById("editForm").action = "{{ route('updatetsa', '') }}/" + button.getAttribute("data-id");
+                        document.getElementById("editForm").action = "{{ route('updatesp', '') }}/" + button.getAttribute("data-id");
 
                         document.querySelector("#myFormEdit input[name='applicantname']").value = button.getAttribute("data-applicant_name");
                         document.querySelector("#myFormEdit input[name='applicantnumber']").value = button.getAttribute("data-applicant_number");
+                        document.querySelector("#myFormEdit input[name='refferedinvestigator']").value = button.getAttribute("data-reffered_investigator");
                         document.querySelector("#myFormEdit input[name='location']").value = button.getAttribute("data-location");
                         document.querySelector("#myFormEdit input[name='surveynumber']").value = button.getAttribute("data-survey_no");
                         document.querySelector("#myFormEdit textarea[name='remarks']").value = button.getAttribute("data-remarks");
@@ -300,16 +327,16 @@
                         let statusDropdown = document.querySelector("#myFormEdit select[name='status']");
                         let statusValue = button.getAttribute("data-patented_subsisting");
 
-                        let clearedoldDropdown = document.querySelector("#myFormEdit select[name='clearedold']");
-                        let clearedoldValue = button.getAttribute("data-cleared_old");
+                        let sectorDropdown = document.querySelector("#myFormEdit select[name='sector']");
+                        let sectorValue = button.getAttribute("data-sector");
                         for (let option of statusDropdown.options) {
                             if (option.value.toLowerCase() === statusValue.toLowerCase()) {
                                 option.selected = true;
                                 break;
                             }
                         }
-                        for (let option of clearedoldDropdown.options) {
-                            if (option.value.toLowerCase() === clearedoldValue.toLowerCase()) {
+                        for (let option of sectorDropdown.options) {
+                            if (option.value.toLowerCase() === sectorValue.toLowerCase()) {
                                 option.selected = true;
                                 break;
                             }

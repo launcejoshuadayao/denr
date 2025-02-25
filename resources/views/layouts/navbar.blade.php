@@ -33,10 +33,11 @@
                     <a href="/rfpa">RFPA</a>
                     <a href="/sa">SA</a>
                     <a href="/tsa">TSA</a> 
-                    <div class = "sp">
+                    <a href="/sp">SP</a>
+                    <!-- <div class = "sp">
                         <div class = dropdown-sp>
                             <li>
-                    <a href="">SP<i class="ri-arrow-down-s-line"></i></a>
+                    <a href="/sp">SP<i class="ri-arrow-down-s-line"></i></a>
                     </li>
                     <p>Special Patent</p>
                     <div class="sp-content">
@@ -44,7 +45,7 @@
                             <a href="">School</a>
                         </div>
                     </div>
-                    </div>
+                    </div> -->
                 </ul>                    
             </div>
             <div class="nav-2">
