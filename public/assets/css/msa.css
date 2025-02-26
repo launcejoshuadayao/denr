@@ -171,13 +171,17 @@ table tbody tr:hover {
     cursor: pointer;
 }
 
-.view { color: #03A9F4; }
+.view { 
+    color: #03A9F4; 
+}
+
 .edit-btn { 
     color: #FFC107;
     margin-right: 5px; 
 }
+
 .delete-confirm { 
-    color: #E34724;
+    color: #808080;
     margin-left: 0px; 
 }
 
@@ -187,7 +191,7 @@ table tbody tr:hover {
 }
 
 .view-pdf{
-    color: black;
+    color: #E34724;
     margin-right: 5px; 
 }
 
