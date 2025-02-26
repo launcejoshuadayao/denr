@@ -157,7 +157,7 @@ table tbody tr:hover {
     /* padding: auto; */
     /* margin-left: 6px; */
     /* padding-right: 10px; */
-    font-size: 20px;
+    font-size: 22px; 
 }
 
 .actions{
@@ -171,7 +171,6 @@ table tbody tr:hover {
     cursor: pointer;
 }
 
-
 .view { color: #03A9F4; }
 .edit-btn { 
     color: #FFC107;
@@ -179,6 +178,16 @@ table tbody tr:hover {
 }
 .delete-confirm { 
     color: #E34724;
-    margin-left: 5px; 
+    margin-left: 0px; 
+}
+
+.download-btn{
+    color: green;
+    margin-right: 5px;
+}
+
+.view-pdf{
+    color: black;
+    margin-right: 5px; 
 }
 

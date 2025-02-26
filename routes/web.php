@@ -9,6 +9,7 @@ use App\Http\Controllers\RfpaController;
 use App\Http\Controllers\FpaController;
 use App\Http\Controllers\SpController;
 use App\Http\Controllers\AccountsController;
+use App\Http\Controllers\FileController;
 
 Route::get('/', function () {
     return view('index');
@@ -60,6 +61,14 @@ Route::get('/spschool', [SpController:: class, 'sp_school'])->name('sp-school');
 Route::post('/addsp_school', [SpController::class, 'addspschool'])->name('addsp_school');
 Route::put('/updatesp_school/{id_spschool}', [SpController::class, 'updatesp_school'])->name('updatesp_school');
 Route::delete('/deletesp_school/{id_spschool}', [SpController::class, 'deletesp_school'])->name('deletesp_school');
+
+//File Upload
+Route::post('/upload', [FileController::class, 'upload'])->name('upload');
+Route::get('/files', [FileController::class, 'listFiles']);
+Route::get('/download/{files_id}', [FileController::class, 'download'])->name('files.download');
+
+//view File
+Route::get('/view-file/{id}', [FileController::class, 'viewFile'])->name('view.file');
 
 
 

@@ -28,6 +28,7 @@
                 </div>
                 <ul>
                     <a href="/login">HOME</a>
+                    <a href="/files">RECORDS</a>
                     <a href="/msa">MSA</a>
                     <a href="/fpa">FPA</a>
                     <a href="/rfpa">RFPA</a>

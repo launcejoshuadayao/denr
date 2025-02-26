@@ -75,15 +75,15 @@
                         data-survey_no="{{ $tsa->survey_no }}"
                         data-cleared_old="{{ $tsa->cleared_old }}"
                         data-remarks="{{ $tsa->remarks }}" onclick="openFormEdit(this)">
-                        <i class="material-icons">&#xE254;</i> <!-- Edit Icon -->
+                        <i class="ri-pencil-fill"></i><!-- Edit Icon -->
                     </button>
 
             <form action="{{ route('deletetsa', ['id_tsa' => $tsa->id_tsa]) }}" method="POST"
                     class="delete-form">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="delete-confirm" title="Delete">
-                        <i class="material-icons">&#xe149;</i>
+                        <button type="submit" class="delete-confirm" title="Archive">
+                            <i class="ri-archive-2-fill"></i> 
                         </button>
             </form>
 

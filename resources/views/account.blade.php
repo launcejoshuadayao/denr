@@ -8,7 +8,7 @@
 <div class="table-container">
     <div class="table-title">
         <div class="title-left">
-        <h2>Manage Users</h2>
+        <h2>MANAGE USERS</h2>
         <button class="addApplicant" onclick="openForm()">ADD USER</button>
         </div>
         <div class="search-filter">

@@ -75,14 +75,14 @@
                         data-location="{{ $sp_school->location }}" 
                         data-survey_no="{{ $sp_school->survey_no }}"
                         data-remarks="{{ $sp_school->remarks }}" onclick="openFormEdit(this)">
-                        <i class="material-icons">&#xE254;</i> <!-- Edit Icon -->
+                        <i class="ri-pencil-fill"></i><!-- Edit Icon -->
                     </button>
 
             <form action="{{ route('deletesp_school', ['id_spschool' => $sp_school->id_spschool]) }}" method="POST"
                     class="delete-form">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="delete-confirm" title="Delete">
+                        <button type="submit" class="delete-confirm" title="Archive">
                         <i class="material-icons">&#xe149;</i>
                         </button>
             </form>

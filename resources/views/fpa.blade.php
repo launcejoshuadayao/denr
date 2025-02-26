@@ -67,7 +67,7 @@
                         data-location="{{ $fpa->location }}" 
                         data-survey_no="{{ $fpa->survey_no }}"
                         data-remarks="{{ $fpa->remarks }}" onclick="openFormEdit(this)">
-                        <i class="material-icons">&#xE254;</i> <!-- Edit Icon -->
+                        <i class="ri-pencil-fill"></i> <!-- Edit Icon -->
                     </button>
 
                         <form action="{{ route('deletefpa', ['id_fpa' => $fpa->id_fpa]) }}" method="POST"
@@ -75,7 +75,7 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="delete-confirm">
-                            <i class="material-icons">&#xe149;</i>
+                                <i class="ri-archive-2-fill"></i>
                             </button>
                         </form>
 
@@ -88,7 +88,7 @@
     </table>
 
     <div class="form-popup" id="myForm">
-                <form action="{{ route('addfpa') }}" class="form-container" method="POST">
+                <form action="{{ route('addfpa') }}" class="form-container  " method="POST">
                     @csrf
                     <div class="titleCloseButton">
                         <h1 style="margin-bottom: 10px;">ADD APPLICATION</h1><button type="button" class="close-button"

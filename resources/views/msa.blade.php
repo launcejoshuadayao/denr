@@ -62,15 +62,15 @@
                                         data-patented_subsisting="{{ $ms->patented_subsisting }}"
                                         data-location="{{ $ms->location }}" data-survey_no="{{ $ms->survey_no }}"
                                         data-remarks="{{ $ms->remarks }}" onclick="openFormEdit(this)">
-                                        <i class="material-icons">&#xE254;</i> <!-- Edit Icon -->
+                                        <i class="ri-pencil-fill"></i> <!-- Edit Icon -->
                                     </button>
 
                                     <form action="{{ route('deletemsa', ['id_msa' => $ms->id_msa]) }}" method="POST"
                                         class="delete-form">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="delete-confirm" title="Delete">
-                                            <i class="material-icons">&#xe149;</i>
+                                        <button type="submit" class="delete-confirm" title="Archive">
+                                            <i class="ri-archive-2-fill"></i>
                                         </button>
                                     </form>
 
