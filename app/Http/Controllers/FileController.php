@@ -15,17 +15,17 @@ class FileController extends Controller
     
     public function upload(Request $request)
     {
-        // Validate the request
+        
         $request->validate([
             'files' => 'required|array',
-            'files.*' => 'file|mimes:pdf|max:20240', // Max file size 20MB
+            'files.*' => 'file|mimes:pdf|max:20240', 
         ], [
             'files.required' => 'Please select at least one file to upload.',
-            'files.*.mimes' => 'Only PDF and DOCX files are allowed.',
+            'files.*.mimes' => 'Only PDF files are allowed.',
             'files.*.max' => 'File size must not exceed 20MB.',
         ]);
     
-        // Check if there are files
+       
         if (!$request->hasFile('files')) {
             return back()->with('error', 'No files selected for upload.');
         }
@@ -35,16 +35,16 @@ class FileController extends Controller
             $extension = $file->getClientOriginalExtension();
             $fileName = $originalName . '.' . $extension;
     
-            // Check if file already exists and rename with (#)
+            
             $counter = 1;
             while (Files::where('file_name', $fileName)->exists()) {
                 $fileName = $originalName . " ($counter)." . $extension;
                 $counter++;
             }
     
-            $filePath = $file->storeAs('uploads', $fileName, 'public'); // Save file
+            $filePath = $file->storeAs('uploads', $fileName, 'public');
     
-            // Save file info in the database
+            
             Files::create([
                 'file_name' => $fileName,
                 'file_path' => $filePath,
@@ -127,9 +127,9 @@ class FileController extends Controller
 
     public function download($files_id)
     {
-        $file = Files::where('files_id', $files_id)->firstOrFail(); // Find file using files_id
+        $file = Files::where('files_id', $files_id)->firstOrFail(); 
     
-        $filePath = storage_path("app/public/{$file->file_path}"); // Full file path
+        $filePath = storage_path("app/public/{$file->file_path}"); 
     
         if (file_exists($filePath)) {
             return response()->download($filePath, $file->file_name);
@@ -140,7 +140,7 @@ class FileController extends Controller
 
     public function viewFile($id)
     {
-        $file = Files::where('files_id', $id)->firstOrFail(); // Use files_id instead of id
+        $file = Files::where('files_id', $id)->firstOrFail(); 
     
         return response()->file(storage_path("app/public/{$file->file_path}"));
     }
