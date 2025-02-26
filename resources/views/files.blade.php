@@ -52,6 +52,7 @@
                                     @endif
 
                                     <form action="{{ route('files.download', $file->files_id) }}" method="GET">
+                                        @csrf
                                         <button type="submit" class="download-btn" title="Download File"><i
                                                 class="ri-file-download-fill"></i></button>
                                     </form>
