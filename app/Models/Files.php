@@ -12,5 +12,5 @@ class Files extends Model
     use HasFactory;
     //
     protected $table = 'files';
-    protected $fillable = ['file_name', 'file_path'];
+    protected $fillable = ['applicantname', 'applicationType', 'file_name', 'file_path'];
 }

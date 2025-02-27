@@ -15,11 +15,15 @@ class FileController extends Controller
     
     public function upload(Request $request)
     {
-        
+       
         $request->validate([
+            'applicantname' => 'required|string|max:255',
+            'applicationType' => 'required|string',
             'files' => 'required|array',
             'files.*' => 'file|mimes:pdf|max:20240', 
         ], [
+            'applicantname.required' => 'Applicant name is required.',
+            'applicationType.required' => 'Please select an application type.',
             'files.required' => 'Please select at least one file to upload.',
             'files.*.mimes' => 'Only PDF files are allowed.',
             'files.*.max' => 'File size must not exceed 20MB.',
@@ -30,22 +34,29 @@ class FileController extends Controller
             return back()->with('error', 'No files selected for upload.');
         }
     
+        
+        $applicantName = $request->input('applicantname');
+        $applicationType = $request->input('applicationType');
+    
         foreach ($request->file('files') as $file) {
             $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $extension = $file->getClientOriginalExtension();
             $fileName = $originalName . '.' . $extension;
     
-            
+         
             $counter = 1;
             while (Files::where('file_name', $fileName)->exists()) {
                 $fileName = $originalName . " ($counter)." . $extension;
                 $counter++;
             }
     
+            
             $filePath = $file->storeAs('uploads', $fileName, 'public');
     
             
             Files::create([
+                'applicantname' => $applicantName,
+                'applicationType' => $applicationType,
                 'file_name' => $fileName,
                 'file_path' => $filePath,
             ]);

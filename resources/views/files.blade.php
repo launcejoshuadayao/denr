@@ -26,6 +26,8 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Applicant Name</th>
+                        <th>Application Type</th>
                         <th>Filename</th>
                         <th>Date Created</th>
                         <th>Actions</th>
@@ -35,10 +37,13 @@
                 <tbody>
                     @foreach($files as $file)
                         <tr>
+                            
                             <td>{{ $file->files_id}}</td>
+                            <td>{{ $file->applicantname}}</td>
 
+                            <td>{{ $file->applicationType }}</td>   
                             <td>{{ $file->file_name }}</td>
-                            <td>{{ \Carbon\Carbon::parse($file->created_at)->format('F d, Y h:i A') }}</td>
+                            <td>{{ \Carbon\Carbon::parse(time: $file->created_at)->format('F d, Y h:i A') }}</td>
                             <td>
                                 <div class="actions">
 
@@ -88,7 +93,22 @@
 
                     <hr>
                     <div class="row" style="margin-top: 10px;">
-                        <div class="column" style="width: 50%;">
+                        <div class="column" style="width: 60%;">
+                            <label for="applicantname">Applicant Name </label><br>
+                            <input type="text" name="applicantname" id="applicantname" style="width: 100%">
+                            <label for="applicationType">Application Type</label>
+                            <select name="applicationType" id="applicationType" style="width: 100%">
+                                <option value=""selected disabled>SELECT APPLICATION</option>
+                                <option value="MSA">MSA</option>
+                                <option value="FPA">FPA</option>
+                                <option value="RFPA">RFPA</option>
+                                <option value="TSA - CLEARED">TSA - CLEARED</option>
+                                <option value="TSA - SUBSISTING">TSA - SUBSISTING</option>
+                                <option value="SA">SA</option>
+                                <option value="SP - GOVERNMENT">SP - GOV</option>
+                                <option value="SP - SCHOOL">SP - SCHOOL</option>
+                               
+                            </select>
                             <label for="files">Upload Files</label><br>
                             <input type="file" name="files[]" multiple><br><br>
 
