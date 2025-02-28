@@ -16,6 +16,7 @@
 
 
 </head>
+
 <body>
 
 <div class="main">
@@ -26,6 +27,7 @@
                 <h2 class = "title">DENR</h2>
                 <h4 class="subtitile">CENRO</h4>
                 </div>
+               
                 <ul>
                     <a href="/login">HOME</a>
                     <a href="/files">RECORDS</a>
