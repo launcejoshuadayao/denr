@@ -94,7 +94,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="delete-confirm" title="Archive">
-                                                <i class="material-icons">&#xe149;</i>
+                                                <i class="ri-archive-2-fill"></i>
                                             </button>
                                         </form>
 
