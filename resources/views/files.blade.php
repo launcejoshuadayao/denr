@@ -35,6 +35,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if($files->isEmpty())
+                        <tr>
+                            <td colspan="6" style="text-align: center; opacity: 0.5; padding: 20px;">
+                                <div >
+                                    <p>No Records Found.</p>
+                                    {{-- <img src="{{asset('assets/images/empty.svg')}}" alt=""> --}}
+
+                                </div>
+                            </td>
+                        </tr>
+                    @else
                     @foreach($files as $file)
                         <tr>
                             
@@ -77,6 +88,7 @@
                             </td>
                         </tr>
                     @endforeach
+                    @endif
                 </tbody>
             </table>
 

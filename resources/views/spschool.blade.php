@@ -2,100 +2,112 @@
 @section('content')
 
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-<body>
-<div class="table-container">
-    <div class="table-title">
-        <div class="title-left">
-        <h2>SPECIAL PATENT - SCHOOL</h2>
-        <button class="addApplicant" onclick="openForm()">ADD APPLICANT</button>
-        </div>
-        <div class="search-filter">
-            <p class="p-filter">Filter: </p>
-            <div class="filter">
-            {{-- <select name="filter1" id="filter1">
+    <body>
+        <div class="table-container">
+            <div class="table-title">
+                <div class="title-left">
+                    <h2>SPECIAL PATENT - SCHOOL</h2>
+                    <button class="addApplicant" onclick="openForm()">ADD APPLICANT</button>
+                </div>
+                <div class="search-filter">
+                    <p class="p-filter">Filter: </p>
+                    <div class="filter">
+                        {{-- <select name="filter1" id="filter1">
 
-                <option selected disabled hidden style = "color: #a0a5b1;" value = "none1" >Sector</option>
-                <option value="Government">Government</option>
-                <option value="School">School</option>
-                <option value="All">All</option>
-            </select> --}}
-            <select name="filter" id="filter">
-                <option selected disabled hidden style = "color: #a0a5b1;" value = "none" >Patented/Subsisting</option>
-                <option value="Subsisting">Subsisting</option>
-                <option value="Patented">Patented</option>
-                <option value="All">All</option>
-            </select>
+                            <option selected disabled hidden style="color: #a0a5b1;" value="none1">Sector</option>
+                            <option value="Government">Government</option>
+                            <option value="School">School</option>
+                            <option value="All">All</option>
+                        </select> --}}
+                        <select name="filter" id="filter">
+                            <option selected disabled hidden style="color: #a0a5b1;" value="none">Patented/Subsisting
+                            </option>
+                            <option value="Subsisting">Subsisting</option>
+                            <option value="Patented">Patented</option>
+                            <option value="All">All</option>
+                        </select>
+                    </div>
+
+
+                    <div class="search-box">
+                        <i class="material-icons">&#xE8B6;</i>
+                        <input type="text" id="searchInput" placeholder="Search&hellip;">
+                    </div>
+
+
+                </div>
+
             </div>
+            <table class="table" id="tables">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Applicant Name</th>
+                        <th>Applicant Number</th>
+                        <th>Reffered Investigator</th>
+                        <th>Patented/Subsisting</th>
+                        <th>Location</th>
+                        <th>Survey No.</th>
+                        <th>Remarks</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if($sp_schooldata->isEmpty())
+                        <tr>
+                            <td colspan="9" style="text-align: center; opacity: 0.5; padding: 20px;">
+                                <div>
+                                    <p>No Records Found.</p>
+                                    {{-- <img src="{{asset('assets/images/empty.svg')}}" alt=""> --}}
 
+                                </div>
+                            </td>
+                        </tr>
+                    @else
+                        @foreach($sp_schooldata as $sp_school)
+                            <tr>
+                                <td>{{ $sp_school->id_spschool}}</td>
+                                <td>{{ $sp_school->applicant_name }}</td>
+                                <td>{{ $sp_school->applicant_number }}</td>
+                                <td>{{ $sp_school->reffered_investigator }}</td>
+                                <td>{{ $sp_school->patented_subsisting }}</td>
 
-            <div class="search-box">
-            <i class="material-icons">&#xE8B6;</i>
-            <input type="text" id="searchInput" placeholder="Search&hellip;">
-            </div>
+                                <td>{{ $sp_school->location }}</td>
+                                <td>{{ $sp_school->survey_no }}</td>
+                                <td>{{ $sp_school->remarks }}</td>
+                                <td>
+                                    <div class="actions">
+                                        <button class="edit-btn" title="Edit" data-id="{{ $sp_school->id_spschool}}"
+                                            data-applicant_name="{{ $sp_school->applicant_name }}"
+                                            data-applicant_number="{{ $sp_school->applicant_number }}"
+                                            data-reffered_investigator="{{ $sp_school->reffered_investigator }}"
+                                            data-patented_subsisting="{{ $sp_school->patented_subsisting }}"
+                                            data-location="{{ $sp_school->location }}" data-survey_no="{{ $sp_school->survey_no }}"
+                                            data-remarks="{{ $sp_school->remarks }}" onclick="openFormEdit(this)">
+                                            <i class="ri-pencil-fill"></i><!-- Edit Icon -->
+                                        </button>
 
+                                        <form action="{{ route('deletesp_school', ['id_spschool' => $sp_school->id_spschool]) }}"
+                                            method="POST" class="delete-form">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="delete-confirm" title="Archive">
+                                                <i class="material-icons">&#xe149;</i>
+                                            </button>
+                                        </form>
 
-        </div>
-       
-    </div>
-    <table class = "table" id = "tables">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Applicant Name</th>
-                <th>Applicant Number</th>
-                <th>Reffered Investigator</th>
-                <th>Patented/Subsisting</th>
-                <th>Location</th>
-                <th>Survey No.</th>
-                <th>Remarks</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach($sp_schooldata as $sp_school)
-            <tr>
-            <td>{{ $sp_school->id_spschool}}</td>
-            <td>{{ $sp_school->applicant_name }}</td>
-            <td>{{ $sp_school->applicant_number }}</td>
-            <td>{{ $sp_school->reffered_investigator }}</td>
-            <td>{{ $sp_school->patented_subsisting }}</td>
-            
-            <td>{{ $sp_school->location }}</td>
-            <td>{{ $sp_school->survey_no }}</td>
-            <td>{{ $sp_school->remarks }}</td>
-            <td>
-                <div class="actions">
-                    <button class="edit-btn" title = "Edit" data-id="{{ $sp_school->id_spschool}}"
-                        data-applicant_name="{{ $sp_school->applicant_name }}"
-                        data-applicant_number="{{ $sp_school->applicant_number }}"
-                        data-reffered_investigator="{{ $sp_school->reffered_investigator }}"
-                        data-patented_subsisting="{{ $sp_school->patented_subsisting }}"
-                        data-location="{{ $sp_school->location }}" 
-                        data-survey_no="{{ $sp_school->survey_no }}"
-                        data-remarks="{{ $sp_school->remarks }}" onclick="openFormEdit(this)">
-                        <i class="ri-pencil-fill"></i><!-- Edit Icon -->
-                    </button>
+                                        <!-- <button class="delete" onclick="deleteConfirmation()"><i class="material-icons">&#xE872;</i></button> -->
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
+                </tbody>
+            </table>
 
-            <form action="{{ route('deletesp_school', ['id_spschool' => $sp_school->id_spschool]) }}" method="POST"
-                    class="delete-form">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="delete-confirm" title="Archive">
-                        <i class="material-icons">&#xe149;</i>
-                        </button>
-            </form>
-
-                                    <!-- <button class="delete" onclick="deleteConfirmation()"><i class="material-icons">&#xE872;</i></button> -->
-            </div>
-            </td>
-            </tr>
-           @endforeach
-        </tbody>
-    </table>
-
-    <div class="form-popup" id="myForm">
+            <div class="form-popup" id="myForm">
                 <form action="{{ route('addsp_school') }}" class="form-container" method="POST">
                     @csrf
                     <div class="titleCloseButton">
@@ -111,25 +123,25 @@
                                 required><br>
                             <label for="location">Location</label>
                             <input type="text" placeholder='Enter location' name="location" required><br>
-                 
+
                             <label for="status">Status</label><br>
                             <select name="status">
                                 <option>Select</option>
                                 <option value="Subsisting">Subsisting</option>
                                 <option value="Patented">Patented</option>
                             </select>
-                            </div>
+                        </div>
 
                         <div class="column">
                             <label for="applicantnumber">Applicant Number</label>
                             <input type="text" placeholder="Enter Applicant number" name="applicantnumber" required><br>
                             <div class="row">
                                 <!-- <div class="column"> -->
-                                    <label for="surveynumber">Survey Number</label>
-                                    <input type="text" placeholder="Enter Survey number" name="surveynumber" required><br>
+                                <label for="surveynumber">Survey Number</label>
+                                <input type="text" placeholder="Enter Survey number" name="surveynumber" required><br>
 
-                                    <div class = "row">
-                                    
+                                <div class="row">
+
                                 </div>
                             </div>
                         </div>
@@ -139,7 +151,7 @@
 
                     <label for="remarks">Remarks</label><br>
                     <!-- <input type="textarea" placeholder="Remarks" name="remarks" required><br>
-                        -->
+                            -->
                     <textarea id="comments" name="remarks" rows="4" cols="50" placeholder="Remarks"></textarea><br><br>
                     <input type="submit" class="btn" style="border-radius: 10px;">
 
@@ -148,81 +160,82 @@
 
 
             <div class="form-popupEdit" id="myFormEdit">
-                            <form action="" class="form-containerEdit" id="editForm" method="POST">
-                                @csrf
-                                @method('PUT')
-                                <div class="titleCloseButton">
-                                    <h1 style="margin-bottom: 10px;">EDIT APPLICATION</h1>
-                                    <button type="button" class="close-button" onclick="closeFormEdit()">
-                                        <i class="material-icons">close</i>
-                                    </button>
-                                </div>
-                                <hr>
-                                <div class="row" style="margin-top: 10px;">
-                                    <div class="column">
-                                        <label for="applicantname">Applicant Name</label>
-                                        <input type="text" placeholder="Enter Applicant name (Surname first)" name="applicantname" required><br>
-                                        
-                                        <label for="location">Location</label>
-                                        <input type="text" placeholder='Enter location' name="location" required><br>
+                <form action="" class="form-containerEdit" id="editForm" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="titleCloseButton">
+                        <h1 style="margin-bottom: 10px;">EDIT APPLICATION</h1>
+                        <button type="button" class="close-button" onclick="closeFormEdit()">
+                            <i class="material-icons">close</i>
+                        </button>
+                    </div>
+                    <hr>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="column">
+                            <label for="applicantname">Applicant Name</label>
+                            <input type="text" placeholder="Enter Applicant name (Surname first)" name="applicantname"
+                                required><br>
 
-                                        <label for="status">Status</label><br>
-                                        <select name="status">
-                                            <option>Select</option>
-                                            <option value="Subsisting">Subsisting</option>
-                                            <option value="Patented">Patented</option>
-                                        </select>
-                                    </div>
+                            <label for="location">Location</label>
+                            <input type="text" placeholder='Enter location' name="location" required><br>
 
-                                    <div class="column">
-                                        <label for="applicantnumber">Applicant Number</label>
-                                        <input type="text" placeholder="Enter Applicant number" name="applicantnumber" required><br>
+                            <label for="status">Status</label><br>
+                            <select name="status">
+                                <option>Select</option>
+                                <option value="Subsisting">Subsisting</option>
+                                <option value="Patented">Patented</option>
+                            </select>
+                        </div>
 
-                                        <label for="surveynumber">Survey Number</label>
-                                        <input type="text" placeholder="Enter Survey number" name="surveynumber" required><br>
+                        <div class="column">
+                            <label for="applicantnumber">Applicant Number</label>
+                            <input type="text" placeholder="Enter Applicant number" name="applicantnumber" required><br>
 
-                                        {{-- <label for="sector">Sector</label><br>
-                                        <select name="sector">
-                                        <option>Select</option>
-                                        <option value="Government">Government</option>
-                                        <option value="School">School</option>
-                                    </select> --}}
-                                        {{-- </select> --}}
-                                    </div>
-                                </div>
-                                <label for="refferedinvestigator">Reffered Investigator</label>
-                                <input type="text" placeholder="Enter Reffered Investigator" name="refferedinvestigator" required><br>
+                            <label for="surveynumber">Survey Number</label>
+                            <input type="text" placeholder="Enter Survey number" name="surveynumber" required><br>
 
-                                <label for="remarks">Remarks</label><br>
-                                <textarea id="comments" name="remarks" rows="4" cols="50" placeholder="Remarks"></textarea><br><br>
-                                <input type="submit" class="btn" style="border-radius: 10px;" value="UPDATE APPLICATION">
-  
-    
-    
+                            {{-- <label for="sector">Sector</label><br>
+                            <select name="sector">
+                                <option>Select</option>
+                                <option value="Government">Government</option>
+                                <option value="School">School</option>
+                            </select> --}}
+                            {{-- </select> --}}
+                        </div>
+                    </div>
+                    <label for="refferedinvestigator">Reffered Investigator</label>
+                    <input type="text" placeholder="Enter Reffered Investigator" name="refferedinvestigator" required><br>
 
-                                <script>
-                                        // document.querySelector("#filter").addEventListener("change", filterTable);
-                                        // document.querySelector("#filter1").addEventListener("change", filterTable);
+                    <label for="remarks">Remarks</label><br>
+                    <textarea id="comments" name="remarks" rows="4" cols="50" placeholder="Remarks"></textarea><br><br>
+                    <input type="submit" class="btn" style="border-radius: 10px;" value="UPDATE APPLICATION">
 
-                                        // function filterTable() {
-                                        //     const selectedOption1 = document.querySelector("#filter1").value.toLowerCase(); 
-                                        //     const selectedOption = document.querySelector("#filter").value.toLowerCase();   
-                                        //     const tableRows = document.querySelectorAll("#tables tbody tr");
 
-                                        //     tableRows.forEach((row) => {
-                                        //         const patentedSubsisting = row.children[4].textContent.toLowerCase();  
-                                        //         const sector = row.children[5].textContent.toLowerCase();             
-                                        //         const matchesPatentedSubsisting = (selectedOption === "all" || patentedSubsisting === selectedOption);
-                                        //         const matchesSector = (selectedOption1 === "all" || sector === selectedOption1);
-                                        //         if (matchesPatentedSubsisting && matchesSector) {
-                                        //             row.style.display = "";
-                                        //         } else {
-                                        //             row.style.display = "none";
-                                        //         }
-                                        //     });
-                                        // }
 
-                                        document.querySelector("#filter").addEventListener("change", filterTable);
+
+                    <script>
+                        // document.querySelector("#filter").addEventListener("change", filterTable);
+                        // document.querySelector("#filter1").addEventListener("change", filterTable);
+
+                        // function filterTable() {
+                        //     const selectedOption1 = document.querySelector("#filter1").value.toLowerCase(); 
+                        //     const selectedOption = document.querySelector("#filter").value.toLowerCase();   
+                        //     const tableRows = document.querySelectorAll("#tables tbody tr");
+
+                        //     tableRows.forEach((row) => {
+                        //         const patentedSubsisting = row.children[4].textContent.toLowerCase();  
+                        //         const sector = row.children[5].textContent.toLowerCase();             
+                        //         const matchesPatentedSubsisting = (selectedOption === "all" || patentedSubsisting === selectedOption);
+                        //         const matchesSector = (selectedOption1 === "all" || sector === selectedOption1);
+                        //         if (matchesPatentedSubsisting && matchesSector) {
+                        //             row.style.display = "";
+                        //         } else {
+                        //             row.style.display = "none";
+                        //         }
+                        //     });
+                        // }
+
+                        document.querySelector("#filter").addEventListener("change", filterTable);
 
                         function filterTable() {
 
@@ -246,61 +259,61 @@
                         }
 
 
-                                    </script>
+                    </script>
                     <!-- <script>
-                        document.querySelector("#filter").addEventListener("change", filterTable);
-                        document.querySelector("#filter1").addEventListener("change", filterTable);
+                            document.querySelector("#filter").addEventListener("change", filterTable);
+                            document.querySelector("#filter1").addEventListener("change", filterTable);
 
-                        function filterTable() {
-                            const selectedOption1 = document.querySelector("#filter1").value; 
-                            const selectedOption = document.querySelector("#filter").value; 
-                            const tableRows = document.querySelectorAll("#tables tr");
-+
-                            tableRows.forEach((row, index) => {
-                                if (index === 0) return; 
+                            function filterTable() {
+                                const selectedOption1 = document.querySelector("#filter1").value; 
+                                const selectedOption = document.querySelector("#filter").value; 
+                                const tableRows = document.querySelectorAll("#tables tr");
+    +
+                                tableRows.forEach((row, index) => {
+                                    if (index === 0) return; 
 
-                                const patentedSubsisting = row.children[3].textContent.toLowerCase(); 
-                                const Sector = row.children[6].textContent.toLowerCase(); 
-
-                                
-                                const matchesPatentedSubsisting = (selectedOption === "All" || patentedSubsisting === selectedOption.toLowerCase());
-                                const matchesSector = (selectedOption1 === "All" || Sector === selectedOption1.toLowerCase());
-
-                                
-                                if (selectedOption1 === "All" && selectedOption === "All") {
-                                    row.style.display = ""; 
-                                }
-                                else if (selectedOption1 === "Government" && selectedOption == "All"){
-                                    row.style.display = "";
-                                }
-                                else if (selectedOption1 === "Government" && selectedOption === "Subsisting" && Sector === "government" && patentedSubsisting === "subsisting") {
-                                    row.style.display = ""; 
-                                } 
-                                else if (selectedOption1 === "Government" && selectedOption === "Patented" && Sector === "government" && patentedSubsisting === "patented") {
-                                    row.style.display = "";
-                                } 
-                                else if (selectedOption1 === "School" && selectedOption === "Subsisting" && Sector === "school" && patentedSubsisting === "subsisting") {
-                                    row.style.display = ""; 
-                                } 
-                                else if (selectedOption1 === "School" && selectedOption === "Patented" && Sector === "school" && patentedSubsisting === "patented") {
-                                    row.style.display = "";
-                                } 
-                                else if (matchesPatentedSubsisting && matchesSector) {
-                                    row.style.display = ""; 
-                                } 
-                                else {
-                                    row.style.display = "none"; 
-                                }
-                            });
-                        }
-
-                        </script> -->
-                        
+                                    const patentedSubsisting = row.children[3].textContent.toLowerCase(); 
+                                    const Sector = row.children[6].textContent.toLowerCase(); 
 
 
-                        <script>
+                                    const matchesPatentedSubsisting = (selectedOption === "All" || patentedSubsisting === selectedOption.toLowerCase());
+                                    const matchesSector = (selectedOption1 === "All" || Sector === selectedOption1.toLowerCase());
 
-                        
+
+                                    if (selectedOption1 === "All" && selectedOption === "All") {
+                                        row.style.display = ""; 
+                                    }
+                                    else if (selectedOption1 === "Government" && selectedOption == "All"){
+                                        row.style.display = "";
+                                    }
+                                    else if (selectedOption1 === "Government" && selectedOption === "Subsisting" && Sector === "government" && patentedSubsisting === "subsisting") {
+                                        row.style.display = ""; 
+                                    } 
+                                    else if (selectedOption1 === "Government" && selectedOption === "Patented" && Sector === "government" && patentedSubsisting === "patented") {
+                                        row.style.display = "";
+                                    } 
+                                    else if (selectedOption1 === "School" && selectedOption === "Subsisting" && Sector === "school" && patentedSubsisting === "subsisting") {
+                                        row.style.display = ""; 
+                                    } 
+                                    else if (selectedOption1 === "School" && selectedOption === "Patented" && Sector === "school" && patentedSubsisting === "patented") {
+                                        row.style.display = "";
+                                    } 
+                                    else if (matchesPatentedSubsisting && matchesSector) {
+                                        row.style.display = ""; 
+                                    } 
+                                    else {
+                                        row.style.display = "none"; 
+                                    }
+                                });
+                            }
+
+                            </script> -->
+
+
+
+                    <script>
+
+
                         function openForm() {
                             document.getElementById("myForm").style.display = "block";
                         }
@@ -330,20 +343,20 @@
                         }
 
                         function openFormEdit(button) {
-                        document.getElementById("myFormEdit").style.display = "block";
-                        document.getElementById("editForm").action = "{{ route('updatesp_school', '') }}/" + button.getAttribute("data-id");
+                            document.getElementById("myFormEdit").style.display = "block";
+                            document.getElementById("editForm").action = "{{ route('updatesp_school', '') }}/" + button.getAttribute("data-id");
 
-                        document.querySelector("#myFormEdit input[name='applicantname']").value = button.getAttribute("data-applicant_name");
-                        document.querySelector("#myFormEdit input[name='applicantnumber']").value = button.getAttribute("data-applicant_number");
-                        document.querySelector("#myFormEdit input[name='refferedinvestigator']").value = button.getAttribute("data-reffered_investigator");
-                        document.querySelector("#myFormEdit input[name='location']").value = button.getAttribute("data-location");
-                        document.querySelector("#myFormEdit input[name='surveynumber']").value = button.getAttribute("data-survey_no");
-                        document.querySelector("#myFormEdit textarea[name='remarks']").value = button.getAttribute("data-remarks");
+                            document.querySelector("#myFormEdit input[name='applicantname']").value = button.getAttribute("data-applicant_name");
+                            document.querySelector("#myFormEdit input[name='applicantnumber']").value = button.getAttribute("data-applicant_number");
+                            document.querySelector("#myFormEdit input[name='refferedinvestigator']").value = button.getAttribute("data-reffered_investigator");
+                            document.querySelector("#myFormEdit input[name='location']").value = button.getAttribute("data-location");
+                            document.querySelector("#myFormEdit input[name='surveynumber']").value = button.getAttribute("data-survey_no");
+                            document.querySelector("#myFormEdit textarea[name='remarks']").value = button.getAttribute("data-remarks");
 
-                        let statusDropdown = document.querySelector("#myFormEdit select[name='status']");
-                        let statusValue = button.getAttribute("data-patented_subsisting");
+                            let statusDropdown = document.querySelector("#myFormEdit select[name='status']");
+                            let statusValue = button.getAttribute("data-patented_subsisting");
 
-                    }
+                        }
 
 
 
@@ -409,38 +422,47 @@
                     @endif
 
                     <script>
-                    document.addEventListener("DOMContentLoaded", function () {
-                        document.getElementById("searchInput").addEventListener("input", function () {
-                            const searchValue = this.value.toLowerCase();
-                            const rows = document.querySelectorAll("#tables tbody tr");
+                        document.addEventListener("DOMContentLoaded", function () {
+                            document.getElementById("searchInput").addEventListener("input", function () {
+                                const searchValue = this.value.toLowerCase();
+                                const rows = document.querySelectorAll("#tables tbody tr");
 
-                            rows.forEach(row => {
-                                const cells = row.querySelectorAll("td");
-                                let match = false;
-                                cells.forEach(cell => {
-                                    if (cell.textContent.toLowerCase().includes(searchValue)) {
-                                        match = true;
-                                    }
+                                rows.forEach(row => {
+                                    const cells = row.querySelectorAll("td");
+                                    let match = false;
+                                    cells.forEach(cell => {
+                                        if (cell.textContent.toLowerCase().includes(searchValue)) {
+                                            match = true;
+                                        }
+                                    });
+                                    row.style.display = match ? "" : "none";
                                 });
-                                row.style.display = match ? "" : "none";
                             });
                         });
-                    });
 
-                </script>
+                    </script>
 
-                        @if(Session::has('message'))
-                            <script>
-                                swal("Error logging in", "{{ Session::get('message') }}", "error");
-                            </script>
-                        @elseif(Session::has('success'))
-                            <script>
-                                swal("Application Added", "{{ Session::get('success') }}", "success");
-                            </script>
-                        @endif
+                    @if(Session::has('message'))
+                        <script>
+                            swal("Error logging in", "{{ Session::get('message') }}", "error");
+                        </script>
+                    @elseif (Session::has('delete_success'))
+                        <script>
+                            swal("Deleted", "{{Session::get('delete_success')}}", "success");
+                        </script>
+                    @elseif (Session::has('update_success'))
+                        <script>
+                            swal("Updated", "{{Session::get('update_success')}}", "success");
+                        </script>
+                    @elseif(Session::has('success') && !Session::has('delete_success') && !Session::has('update_success'))
+                        <script>
+                            swal("Application Added", "{{ Session::get('success') }}", "success");
+                        </script>
+
+                    @endif
 
 
 
-</body>
+    </body>
 
 @endsection

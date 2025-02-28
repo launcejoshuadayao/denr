@@ -66,7 +66,7 @@ class MsaController extends Controller
             'remarks' => $request->remarks,
         ]);
 if($update){
-    return back()->with('success', 'Application updated successfully!');
+    return back()->with('update_success', 'Application updated successfully!');
 }
 else{
     return back()->with('error', 'An error occurred while updating the record.');
@@ -88,13 +88,13 @@ else{
         $deleted = DB::table('msa')->where('id_msa', $id_msa)->delete();
 
         if ($deleted) {
-            return back()->with('success', 'Record successfully deleted.');
+            return back()->with('delete_success', 'Record successfully deleted.');
         } else {
             return back()->with('error', 'Record not found.');
         }
    
    if($deleted){
-    return back()->with('success', 'Record successfully deleted.');
+    return back()->with('delete_success', 'Record successfully deleted.');
    }
    else{
     return back()->with('error', 'Record not found.');

@@ -471,17 +471,12 @@ textarea{
     background: #f1f1f1;
 }
 
-.swal-icon {
-    width: 300px !important; /* Adjust size */
-    height: 200px !important; /* Adjust size */
-}
+
 
 .swal-footer {
     text-align: center !important;
 }
-.swal-button-container {
-    display: inline-block;
-}
+
 
 
 

@@ -67,7 +67,7 @@ class TsaController extends Controller
         'remarks' => $request->remarks
     ]);
     if ($update) {
-        return back()->with('success', 'Record updated successfully.');
+        return back()->with('update_success', 'Record updated successfully.');
     } else {
         return back()->with('error', 'An error occurred while updating the record.');
     }
@@ -88,17 +88,11 @@ class TsaController extends Controller
         $deleted = DB::table('tsa')->where('id_tsa', $id_tsa)->delete();
 
         if ($deleted) {
-            return back()->with('success', 'Record successfully deleted.');
+            return back()->with('delete_success', 'Record successfully deleted.');
         } else {
             return back()->with('error', 'Record not found.');
         }
-   
-   if($deleted){
-    return back()->with('success', 'Record successfully deleted.');
-   }
-   else{
-    return back()->with('error', 'Record not found.');
-   }
+
     }
 
 }

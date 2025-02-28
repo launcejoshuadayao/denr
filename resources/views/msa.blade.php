@@ -23,11 +23,11 @@
                     </div>
 
                     <div class="search-box">
-                    <i class="material-icons">&#xE8B6;</i>
-                    <input type="text" id="searchInput" placeholder="Search&hellip;">
+                        <i class="material-icons">&#xE8B6;</i>
+                        <input type="text" id="searchInput" placeholder="Search&hellip;">
                     </div>
 
-                 </div>
+                </div>
 
             </div>
 
@@ -45,40 +45,52 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($msadata as $ms)
+                    @if($msadata->isEmpty())
                         <tr>
-                            <td>{{ $ms->id_msa}}</td>
-                            <td>{{ $ms->applicant_name }}</td>
-                            <td>{{ $ms->applicant_number }}</td>
-                            <td>{{ $ms->patented_subsisting }}</td>
-                            <td>{{ $ms->location }}</td>
-                            <td>{{ $ms->survey_no }}</td>
-                            <td>{{ $ms->remarks }}</td>
-                            <td>
-                                <div class="actions">
-                                    <button class="edit-btn" title = "Edit" data-id="{{ $ms->id_msa }}"
-                                        data-applicant_name="{{ $ms->applicant_name }}"
-                                        data-applicant_number="{{ $ms->applicant_number }}"
-                                        data-patented_subsisting="{{ $ms->patented_subsisting }}"
-                                        data-location="{{ $ms->location }}" data-survey_no="{{ $ms->survey_no }}"
-                                        data-remarks="{{ $ms->remarks }}" onclick="openFormEdit(this)">
-                                        <i class="ri-pencil-fill"></i> <!-- Edit Icon -->
-                                    </button>
+                            <td colspan="8" style="text-align: center; opacity: 0.5; padding: 20px;">
+                                <div>
+                                    <p>No Records Found.</p>
+                                    {{-- <img src="{{asset('assets/images/empty.svg')}}" alt=""> --}}
 
-                                    <form action="{{ route('deletemsa', ['id_msa' => $ms->id_msa]) }}" method="POST"
-                                        class="delete-form">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="delete-confirm" title="Archive">
-                                            <i class="ri-archive-2-fill"></i>
-                                        </button>
-                                    </form>
-
-                                    <!-- <button class="delete" onclick="deleteConfirmation()"><i class="material-icons">&#xE872;</i></button> -->
                                 </div>
                             </td>
                         </tr>
-                    @endforeach
+                    @else
+                        @foreach($msadata as $ms)
+                            <tr>
+                                <td>{{ $ms->id_msa}}</td>
+                                <td>{{ $ms->applicant_name }}</td>
+                                <td>{{ $ms->applicant_number }}</td>
+                                <td>{{ $ms->patented_subsisting }}</td>
+                                <td>{{ $ms->location }}</td>
+                                <td>{{ $ms->survey_no }}</td>
+                                <td>{{ $ms->remarks }}</td>
+                                <td>
+                                    <div class="actions">
+                                        <button class="edit-btn" title="Edit" data-id="{{ $ms->id_msa }}"
+                                            data-applicant_name="{{ $ms->applicant_name }}"
+                                            data-applicant_number="{{ $ms->applicant_number }}"
+                                            data-patented_subsisting="{{ $ms->patented_subsisting }}"
+                                            data-location="{{ $ms->location }}" data-survey_no="{{ $ms->survey_no }}"
+                                            data-remarks="{{ $ms->remarks }}" onclick="openFormEdit(this)">
+                                            <i class="ri-pencil-fill"></i> <!-- Edit Icon -->
+                                        </button>
+
+                                        <form action="{{ route('deletemsa', ['id_msa' => $ms->id_msa]) }}" method="POST"
+                                            class="delete-form">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="delete-confirm" title="Archive">
+                                                <i class="ri-archive-2-fill"></i>
+                                            </button>
+                                        </form>
+
+                                        <!-- <button class="delete" onclick="deleteConfirmation()"><i class="material-icons">&#xE872;</i></button> -->
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
 
@@ -124,7 +136,7 @@
                     </div>
                     <label for="remarks">Remarks</label><br>
                     <!-- <input type="textarea" placeholder="Remarks" name="remarks" required><br>
-                        -->
+                                -->
                     <textarea id="comments" name="remarks" rows="4" cols="50" placeholder="Remarks"></textarea><br><br>
                     <input type="submit" class="btn" style="border-radius: 10px;">
 
@@ -323,41 +335,51 @@
 
                                     title: "Success",
                                     text: "{{ Session::get('success') }}",
-                                    icon: "{{ asset('assets/images/success.svg') }}",
+                                    // icon: "{{ asset('assets/images/success.svg') }}",
+                                    type: "success"
                                     button: "Proceed"
                                 });
                         </script>
                     @endif
 
                     <script>
-                            document.addEventListener("DOMContentLoaded", function () {
-                                document.getElementById("searchInput").addEventListener("input", function () {
-                                    const searchValue = this.value.toLowerCase();
-                                    const rows = document.querySelectorAll("#tables tbody tr");
+                        document.addEventListener("DOMContentLoaded", function () {
+                            document.getElementById("searchInput").addEventListener("input", function () {
+                                const searchValue = this.value.toLowerCase();
+                                const rows = document.querySelectorAll("#tables tbody tr");
 
-                                    rows.forEach(row => {
-                                        const cells = row.querySelectorAll("td");
-                                        let match = false;
-                                        cells.forEach(cell => {
-                                            if (cell.textContent.toLowerCase().includes(searchValue)) {
-                                                match = true;
-                                            }
-                                        });
-                                        row.style.display = match ? "" : "none";
+                                rows.forEach(row => {
+                                    const cells = row.querySelectorAll("td");
+                                    let match = false;
+                                    cells.forEach(cell => {
+                                        if (cell.textContent.toLowerCase().includes(searchValue)) {
+                                            match = true;
+                                        }
                                     });
+                                    row.style.display = match ? "" : "none";
                                 });
                             });
+                        });
 
                     </script>
 
                     @if(Session::has('message'))
-                    <script>
-                        swal("Error logging in", "{{ Session::get('message') }}", "error");
-                    </script>
-                    @elseif(Session::has('success'))
+                        <script>
+                            swal("Error logging in", "{{ Session::get('message') }}", "error");
+                        </script>
+                    @elseif (Session::has('delete_success'))
+                        <script>
+                            swal("Deleted", "{{Session::get('delete_success')}}", "success");
+                        </script>
+                    @elseif (Session::has('update_success'))
+                        <script>
+                            swal("Updated", "{{Session::get('update_success')}}", "success");
+                        </script>
+                    @elseif(Session::has('success') && !Session::has('delete_success') && !Session::has('update_success'))
                     <script>
                         swal("Application Added", "{{ Session::get('success') }}", "success");
                     </script>
+
                     @endif
 
     </body>

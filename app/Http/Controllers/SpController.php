@@ -103,7 +103,7 @@ class SpController extends Controller
         'remarks' => $request->remarks
     ]);
     if ($update) {
-        return back()->with('success', 'Record updated successfully.');
+        return back()->with('update_success', 'Record updated successfully.');
     } else {
         return back()->with('error', 'An error occurred while updating the record.');
     }
@@ -130,7 +130,7 @@ public function updatesp_school(Request $request, $id_spschool)
         'remarks' => $request->remarks
     ]);
     if ($update) {
-        return back()->with('success', 'Record updated successfully.');
+        return back()->with('update_success', 'Record updated successfully.');
     } else {
         return back()->with('error', 'An error occurred while updating the record.');
     }
@@ -151,17 +151,11 @@ public function updatesp_school(Request $request, $id_spschool)
         $deleted = DB::table('sp_government')->where('id_spgov', $id_spgov)->delete();
 
         if ($deleted) {
-            return back()->with('success', 'Record successfully deleted.');
+            return back()->with('delete_success', 'Record successfully deleted.');
         } else {
             return back()->with('error', 'Record not found.');
         }
    
-   if($deleted){
-    return back()->with('success', 'Record successfully deleted.');
-   }
-   else{
-    return back()->with('error', 'Record not found.');
-   }
     }
 
     public function deletesp_school($id_spschool)
@@ -178,16 +172,10 @@ public function updatesp_school(Request $request, $id_spschool)
         $deleted = DB::table('sp_school')->where('id_spschool', $id_spschool)->delete();
 
         if ($deleted) {
-            return back()->with('success', 'Record successfully deleted.');
+            return back()->with('delete_success', 'Record successfully deleted.');
         } else {
             return back()->with('error', 'Record not found.');
         }
    
-   if($deleted){
-    return back()->with('success', 'Record successfully deleted.');
-   }
-   else{
-    return back()->with('error', 'Record not found.');
-   }
     }
 }

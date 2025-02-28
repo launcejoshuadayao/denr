@@ -2,45 +2,48 @@
 @section('content')
 
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<body>
-<div class="table-container">
-    <div class="table-title">
-        <div class="title-left">
-        <h2>SURVEY AUTHORITY</h2>
-        <button class="addApplicant" onclick="openForm()">ADD APPLICANT</button>
-        </div>
-        <div class="search-filter">
-            <p class="p-filter">Filter: </p>
-            <div class="filter">
-            <!-- <select name="filter1" id="filter1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 
-                <option selected disabled hidden style = "color: #a0a5b1;" >Cleared/Old</option>
-                <option value="Subsisting">Cleared</option>
-                <option value="Patented">Old</option>
-                <option value="">All</option>
-            </select> -->
-            <select name="filter" id="filter">
+    <body>
+        <div class="table-container">
+            <div class="table-title">
+                <div class="title-left">
+                    <h2>SURVEY AUTHORITY</h2>
+                    <button class="addApplicant" onclick="openForm()">ADD APPLICANT</button>
+                </div>
+                <div class="search-filter">
+                    <p class="p-filter">Filter: </p>
+                    <div class="filter">
+                        <!-- <select name="filter1" id="filter1">
 
-                <option selected disabled hidden style = "color: #a0a5b1;" >Status</option>
-                <option value="On Process">On Process</option>
-                <option value="Approved">Approved</option>
-                <option value="Rejected">Rejected</option>
-                <option value="All">All</option>
-            </select>
+                    <option selected disabled hidden style = "color: #a0a5b1;" >Cleared/Old</option>
+                    <option value="Subsisting">Cleared</option>
+                    <option value="Patented">Old</option>
+                    <option value="">All</option>
+                </select> -->
+                        <select name="filter" id="filter">
+
+                            <option selected disabled hidden style="color: #a0a5b1;">Status</option>
+                            <option value="On Process">On Process</option>
+                            <option value="Approved">Approved</option>
+                            <option value="Rejected">Rejected</option>
+                            <option value="All">All</option>
+                        </select>
+                    </div>
+
+
+                    <div class="search-box">
+                        <i class="material-icons">&#xE8B6;</i>
+                        <input type="text" id="searchInput" placeholder="Search&hellip;">
+                    </div>
+
+                </div>
+
             </div>
-
-
-            <div class="search-box">
-            <i class="material-icons">&#xE8B6;</i>
-            <input type="text" id="searchInput" placeholder="Search&hellip;">
-            </div>
-
-        </div>
-       
-    </div>
-    <table class="table" id="tables">
+            <table class="table" id="tables">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -54,41 +57,52 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($sadata as $sa)
+                    @if($sadata->isEmpty())
                         <tr>
-                            <td>{{ $sa->id_sa}}</td>
-                            <td>{{ $sa->applicant_name }}</td>
-                            <td>{{ $sa->applicant_number }}</td>
-                            <td>{{ $sa->on_process_rejected_approve }}</td>
-                            <td>{{ $sa->location }}</td>
-                            <td>{{ $sa->survey_no }}</td>
-                            <td>{{ $sa->remarks }}</td>
-                            <td>
-                                <div class="actions">
-                                    <button class="edit-btn" data-id="{{ $sa->id_sa }}"
-                                        data-applicant_name="{{ $sa->applicant_name }}"
-                                        data-applicant_number="{{ $sa->applicant_number }}"
-                                        data-on_process_rejected_approve="{{ $sa->on_process_rejected_approve }}"
-                                        data-location="{{ $sa->location }}" 
-                                        data-survey_no="{{ $sa->survey_no }}"
-                                        data-remarks="{{ $sa->remarks }}" onclick="openFormEdit(this)">
-                                        <i class="ri-pencil-fill"></i><!-- Edit Icon -->
-                                    </button>
+                            <td colspan="8" style="text-align: center; opacity: 0.5; padding: 20px">
+                                <div>
+                                    <p>No Records Found.</p>
+                                    {{-- <img src="{{asset('assets/images/empty.svg')}}" alt=""> --}}
 
-                                    <form action="{{ route('deletesa', ['id_sa' => $sa->id_sa]) }}" method="POST"
-                                        class="delete-form">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="delete-confirm" title="Archive">
-                                            <i class="ri-archive-2-fill"></i>
-                                        </button>
-                                    </form>
-
-                                    <!-- <button class="delete" onclick="deleteConfirmation()"><i class="material-icons">&#xE872;</i></button> -->
                                 </div>
                             </td>
                         </tr>
-                    @endforeach
+                    @else
+                        @foreach($sadata as $sa)
+                            <tr>
+                                <td>{{ $sa->id_sa}}</td>
+                                <td>{{ $sa->applicant_name }}</td>
+                                <td>{{ $sa->applicant_number }}</td>
+                                <td>{{ $sa->on_process_rejected_approve }}</td>
+                                <td>{{ $sa->location }}</td>
+                                <td>{{ $sa->survey_no }}</td>
+                                <td>{{ $sa->remarks }}</td>
+                                <td>
+                                    <div class="actions">
+                                        <button class="edit-btn" data-id="{{ $sa->id_sa }}"
+                                            data-applicant_name="{{ $sa->applicant_name }}"
+                                            data-applicant_number="{{ $sa->applicant_number }}"
+                                            data-on_process_rejected_approve="{{ $sa->on_process_rejected_approve }}"
+                                            data-location="{{ $sa->location }}" data-survey_no="{{ $sa->survey_no }}"
+                                            data-remarks="{{ $sa->remarks }}" onclick="openFormEdit(this)">
+                                            <i class="ri-pencil-fill"></i><!-- Edit Icon -->
+                                        </button>
+
+                                        <form action="{{ route('deletesa', ['id_sa' => $sa->id_sa]) }}" method="POST"
+                                            class="delete-form">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="delete-confirm" title="Archive">
+                                                <i class="ri-archive-2-fill"></i>
+                                            </button>
+                                        </form>
+
+                                        <!-- <button class="delete" onclick="deleteConfirmation()"><i class="material-icons">&#xE872;</i></button> -->
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
 
@@ -135,7 +149,7 @@
                     </div>
                     <label for="remarks">Remarks</label><br>
                     <!-- <input type="textarea" placeholder="Remarks" name="remarks" required><br>
-                        -->
+                            -->
                     <textarea id="comments" name="remarks" rows="4" cols="50" placeholder="Remarks"></textarea><br><br>
                     <input type="submit" class="btn" style="border-radius: 10px;">
 
@@ -341,37 +355,46 @@
                     @endif
 
 
-                <script>
-                    document.addEventListener("DOMContentLoaded", function () {
-                        document.getElementById("searchInput").addEventListener("input", function () {
-                            const searchValue = this.value.toLowerCase();
-                            const rows = document.querySelectorAll("#tables tbody tr");
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            document.getElementById("searchInput").addEventListener("input", function () {
+                                const searchValue = this.value.toLowerCase();
+                                const rows = document.querySelectorAll("#tables tbody tr");
 
-                            rows.forEach(row => {
-                                const cells = row.querySelectorAll("td");
-                                let match = false;
-                                cells.forEach(cell => {
-                                    if (cell.textContent.toLowerCase().includes(searchValue)) {
-                                        match = true;
-                                    }
+                                rows.forEach(row => {
+                                    const cells = row.querySelectorAll("td");
+                                    let match = false;
+                                    cells.forEach(cell => {
+                                        if (cell.textContent.toLowerCase().includes(searchValue)) {
+                                            match = true;
+                                        }
+                                    });
+                                    row.style.display = match ? "" : "none";
                                 });
-                                row.style.display = match ? "" : "none";
                             });
                         });
-                    });
 
-                </script>
+                    </script>
 
-                        @if(Session::has('message'))
-                            <script>
-                                swal("Error logging in", "{{ Session::get('message') }}", "error");
-                            </script>
-                        @elseif(Session::has('success'))
-                            <script>
-                                swal("Application Added", "{{ Session::get('success') }}", "success");
-                            </script>
-                        @endif
+                    @if(Session::has('message'))
+                        <script>
+                            swal("Error logging in", "{{ Session::get('message') }}", "error");
+                        </script>
+                    @elseif (Session::has('delete_success'))
+                        <script>
+                            swal("Deleted", "{{Session::get('delete_success')}}", "success");
+                        </script>
+                    @elseif (Session::has('update_success'))
+                        <script>
+                            swal("Updated", "{{Session::get('update_success')}}", "success");
+                        </script>
+                    @elseif(Session::has('success') && !Session::has('delete_success') && !Session::has('update_success'))
+                        <script>
+                            swal("Application Added", "{{ Session::get('success') }}", "success");
+                        </script>
 
-            </body>
+                    @endif
+
+    </body>
 
 @endsection
